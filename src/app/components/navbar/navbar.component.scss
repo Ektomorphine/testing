@@ -1,0 +1,23 @@
+@import '../../variables';
+
+.header {
+  background-color: $header-bgc;
+  box-shadow: 0 -1px 18px 5px rgba(50, 50, 50, 1);
+  color: $text-color-header;
+  display: flex;
+  height: 65px;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 12;
+}
+
+.title {
+  font-family: 'Courier New';
+  font-size: 4vh;
+  margin: auto;
+  position: relative;
+  text-align: center;
+  width: 400px;
+}

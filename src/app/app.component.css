@@ -1,0 +1,36 @@
+.sidebar-button {
+  left: 50px;
+  position: fixed;
+  top: 80px;
+}
+
+.container {
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 65px;
+  width: 100%;
+}
+
+.sidenav-content {
+  align-items: center;
+  display: flex;
+  height: 100%;
+  justify-content: center;
+}
+
+.sidenav {
+  padding: 20px;
+}
+
+body {
+  height: 100%;
+  width: 100%;
+}
+
+.button {
+  position: fixed;
+  z-index: 100;
+  top: 1.5%;
+}
