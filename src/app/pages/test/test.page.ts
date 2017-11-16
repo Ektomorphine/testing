@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { TestService } from '../../services/test.service';
+import { ActivatedRoute } from '@angular/router';
+
 
 @Component({
   selector: 'test-page',
@@ -8,18 +10,26 @@ import { TestService } from '../../services/test.service';
 })
 export class TestPage {
 
-  public tests = [];
+  public test = [];
 
-  constructor(private _testService: TestService) {}
+  constructor(private _testService: TestService,
+              private _activatedRoute: ActivatedRoute) {}
+
+  // this._activatedRoute.snapshot.params['id']
 
   ngOnInit() {
     this._testService
       .getTest()
       .subscribe((data => {
-        this.tests = data;
-        setTimeout(() => console.log(this.tests), 500)
-
-      }));
-
+        data.forEach(test => {
+          if (test.id === +this._activatedRoute.snapshot.params['id']) {
+            this.test.push(test);
+          }
+        })
+      })
+    )
   }
+
+
+
 }
