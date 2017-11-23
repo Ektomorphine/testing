@@ -6,17 +6,17 @@
 
 .container {
   border: 1px solid rgba(0, 0, 0, 0.5);
-  height: 100%;
+  height: calc(100% - 65px);
   left: 0;
   position: absolute;
   top: 65px;
   width: 100%;
+  overflow: hidden !important;
 }
 
 .sidenav-content {
   align-items: center;
   display: flex;
-  height: 100%;
   justify-content: center;
 }
 
@@ -24,15 +24,11 @@
   padding: 20px;
 }
 
-body {
-  height: 100%;
-  width: 100%;
-}
-
 .button {
   position: fixed;
   z-index: 100;
   top: 1.5%;
+  color: white;
 }
 
 .menu-item {

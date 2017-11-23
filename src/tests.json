@@ -10,15 +10,39 @@
           "variants": [
             {
               "id": 1,
-              "var_text": "Вариант ответа 1"
+              "var_text": "Вариант ответа 1",
+              "question_id": 1
             },
             {
               "id": 2,
-              "var_text": "Вариант ответа 2"
+              "var_text": "Вариант ответа 2",
+              "question_id": 1
             },
             {
               "id": 3,
-              "var_text": "Вариант ответа 3"
+              "var_text": "javascript ```typescript  alert() ```",
+              "question_id": 1
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "question_text": "Текст вопроса 2",
+          "variants": [
+            {
+              "id": 1,
+              "var_text": "Вариант ответа 4",
+              "question_id": 2
+            },
+            {
+              "id": 2,
+              "var_text": "Вариант ответа 5",
+              "question_id": 2
+            },
+            {
+              "id": 3,
+              "var_text": "Вариант ответа 6",
+              "question_id": 2
             }
           ]
         }
@@ -29,20 +53,23 @@
       "test_name": "Название теста 2",
       "questions": [
         {
-          "id": 2,
+          "id": 1,
           "question_text": "Текст вопроса 2",
           "variants": [
             {
               "id": 1,
-              "var_text": "Вариант ответа 1"
+              "var_text": "Вариант ответа 1",
+              "question_id": 1
             },
             {
               "id": 2,
-              "var_text": "Вариант ответа 2"
+              "var_text": "Вариант ответа 2",
+              "question_id": 1
             },
             {
               "id": 3,
-              "var_text": "Вариант ответа 3"
+              "var_text": "Вариант ответа 3",
+              "question_id": 1
             }
           ]
         }

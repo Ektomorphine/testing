@@ -2,19 +2,19 @@
 <mat-sidenav-container class="container">
   <mat-sidenav #sidenav class="sidenav" mode="push">
     <button type="button" class="menu-item" mat-button (click)="sidenav.toggle()">
-      Close
+      Закрыть
     </button>
     <p>
       <a mat-raised-button class="menu-item" [routerLink]="['select']">
-        Select test
+        Выбрать тест
       </a>
     </p>
   </mat-sidenav>
   <!-- here go components & pages -->
   <router-outlet></router-outlet>
 </mat-sidenav-container>
-<button type="button" class="button" mat-raised-button (click)="sidenav.toggle()">
-  Menu
+<button type="button" class="button" mat-button (click)="sidenav.toggle()">
+   Меню
 </button>
 
 

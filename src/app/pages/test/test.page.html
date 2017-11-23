@@ -1,5 +1,23 @@
-<div class="container">
-  <div *ngFor="let item of test">
-    {{item.test_name}}
+  <mat-toolbar color="warn">
+    <mat-toolbar-row>
+      <span *ngIf="test"> {{test.test_name}} </span>
+      <div class="timer">Осталось времени {{ticks}} </div>
+    </mat-toolbar-row>
+  </mat-toolbar>
+  <div *ngIf="!questions[iteration]">
+      <mat-spinner class="spinner"></mat-spinner>
   </div>
-</div>
+  <div class="container" *ngIf="questions[iteration]">
+    <div class="question"> {{questions[iteration].question_text}} </div>
+    <hr>
+    <div *ngFor="let item of variants">
+      <div *ngIf="item.question_id == iteration + 1"
+           class="answer"
+           (click)="nextQuestion(item)">
+        <markdown [data]="item.var_text">
+        </markdown>
+      </div>
+    </div>
+    <div class="question-counter">Вопрос {{iteration+1}} / {{questions.length}}</div>
+  </div>
+

@@ -13,7 +13,7 @@ export class TestService {
 
   constructor(private _testService: HttpClient) {}
 
-  public getTest(): any {
-    return this._testService.get(URL);
+  public getTest(id?: number): any {
+    return this._testService.get(id ? URL + '/' + id : URL);
   }
 }

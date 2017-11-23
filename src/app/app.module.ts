@@ -19,6 +19,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatCardModule } from '@angular/material/card';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+
 
 @NgModule({
   declarations: [
@@ -36,7 +39,9 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     MatSidenavModule,
     BrowserAnimationsModule,
     AppRoutingModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatCardModule,
+    MatProgressSpinnerModule
   ],
   providers: [TestService],
   bootstrap: [AppComponent]
