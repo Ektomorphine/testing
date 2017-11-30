@@ -12,7 +12,6 @@ export class SelectTestPage {
 
   public tests = [];
   public testId: number;
-  public testArr = new Array(30);
 
   constructor(private _testService: TestService,
               private _activatedRoute: ActivatedRoute) {

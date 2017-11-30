@@ -16,4 +16,8 @@ export class TestService {
   public getTest(id?: number): any {
     return this._testService.get(id ? URL + '/' + id : URL);
   }
+
+  public setTest(body): any {
+    return this._testService.post(URL, body).subscribe();
+  }
 }

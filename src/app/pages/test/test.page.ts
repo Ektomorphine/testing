@@ -16,7 +16,7 @@ export class TestPage implements OnInit{
   public questions: QuestionModel[] = [];
   public variants: VariantsModel[] = [];
   public iteration = 0;
-  public ticks = 30;
+  public timer = 30;
 
   constructor(private _testService: TestService,
               private _activatedRoute: ActivatedRoute) {}
@@ -29,6 +29,7 @@ export class TestPage implements OnInit{
           this.test = data;
           this.test.questions.forEach(item => {
             this.questions.push(item);
+            console.log(this.questions);
             item.variants.forEach(variants => {
               this.variants.push(variants);
             })
@@ -36,12 +37,11 @@ export class TestPage implements OnInit{
         }
       )
     let timer = Observable.timer(2000,1000);
-    timer.subscribe(t => {
-        this.ticks--;
-        console.log(t);
-        if (this.ticks == 0) {
+    timer.subscribe(seconds => {
+        this.timer--;
+        if (this.timer == 0) {
           this.iteration++;
-          this.ticks = 30;
+          this.timer = 30;
         }
     });
   }
@@ -51,7 +51,7 @@ export class TestPage implements OnInit{
   }
 
   public nextQuestion(item): void {
-    this.ticks = 30;
+    this.timer = 30;
     this.iteration++;
   }
 }

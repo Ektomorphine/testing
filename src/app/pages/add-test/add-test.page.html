@@ -1,0 +1,56 @@
+  <mat-toolbar color="warn">
+    <mat-toolbar-row>
+      <span> Добавить тест </span>
+    </mat-toolbar-row>
+  </mat-toolbar>
+  <form class="container" [formGroup]="testForm" novalidate>
+
+    <mat-form-field>
+      <input type="text" matInput placeholder="Название теста" formControlName="test_name">
+    </mat-form-field>
+
+    <div formArrayName="questions">
+      <div *ngFor="let question of testForm.controls.questions.controls; let i = index ">
+        <mat-card class="question-block">
+          <div [formGroupName]="i" class="question-form">
+            <mat-form-field class="question-field" >
+              <input type="text" formControlName="question_text" matInput placeholder="Текст вопроса">
+            </mat-form-field>
+            <div formArrayName="variants">
+              <div *ngFor="let variant of question.controls.variants.controls; let j = index ">
+                <div [formGroupName]="j">
+                  <mat-form-field class="variant-field">
+                    <input type="text" formControlName="var_text" matInput placeholder="Текст ответа">
+                  </mat-form-field>
+                  <img src="assets/trash.svg"
+                       class="delete-variant-icon"
+                       (click)="removeVariant(j, question)">
+                </div>
+              </div>
+            </div>
+            <button mat-button color="primary" (click)="addVariant(question)">
+              Добавить вариант ответа
+            </button>
+            <img src="assets/trash.svg" class="delete-question-icon" (click)="removeQuestions(i)">
+          </div>
+        </mat-card>
+      </div>
+
+    </div>
+
+  </form>
+  <button mat-raised-button (click)="addQuestion()" class="add-question-button">
+    Add question
+  </button>
+  <button class="send-test-button"
+          mat-raised-button
+          (click)="save(testForm)"
+          [disabled]="!testForm.valid">
+    Send
+  </button>
+
+  <div class="container">
+      <textarea  placeholder="Textarea" [(ngModel)]="value"></textarea>
+    <markdown [data]="value">
+    </markdown>
+  </div>

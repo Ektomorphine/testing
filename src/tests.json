@@ -74,6 +74,26 @@
           ]
         }
       ]
+    },
+    {
+      "test_name": "Приветули",
+      "questions": [
+        {
+          "question_text": "Как делули?",
+          "id": 0,
+          "variants": [
+            {
+              "var_text": "Ок",
+              "question_id": 0
+            },
+            {
+              "var_text": "Так се",
+              "question_id": 0
+            }
+          ]
+        }
+      ],
+      "id": 3
     }
   ]
 }
