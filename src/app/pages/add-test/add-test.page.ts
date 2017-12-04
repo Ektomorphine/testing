@@ -3,8 +3,8 @@ import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { TestService } from '../../services/test.service';
 import { TestModel } from '../../models/test.model';
 import { MatSnackBar } from '@angular/material';
-
-
+import { PreviewPage } from '../preview/preview.page';
+import { MatDialog } from '@angular/material'
 
 @Component({
   selector: 'add-test-page',
@@ -13,11 +13,14 @@ import { MatSnackBar } from '@angular/material';
 })
 export class AddTestPage {
   public testForm: FormGroup;
+  public markdownPreview = '**Example**';
   private _questionId = 0;
+  private _variantId = 0;
 
   constructor(private _formBuilder: FormBuilder,
               private _testService: TestService,
-              public snackBar: MatSnackBar) {}
+              public snackBar: MatSnackBar,
+              public dialog: MatDialog) {}
 
   ngOnInit() {
     this.testForm = this._formBuilder.group({
@@ -38,22 +41,33 @@ export class AddTestPage {
     })
   }
 
-  public openSnackBar() {
+  public openSnackBarOnSend() {
     this.snackBar.open('Готово!', '', {
       duration: 1500
     });
   }
 
+  public openDialogPreviewPage(): void {
+   let dialog = this.dialog.open(PreviewPage, {
+     width: '100%',
+     data: {preview: this.markdownPreview}
+   });
+
+   dialog.afterClosed().subscribe(result => {
+     this.markdownPreview = result;
+   });
+  }
 
   public addQuestion() {
     this._questionId++;
+    this._variantId = 0;
     const CONTROL = <FormArray>this.testForm.controls['questions'];
     CONTROL.push(this.initQuestions());
   }
 
-  public save(model) {
+  public saveTest(model) {
     this._testService.setTest(model.value);
-    this.openSnackBar();
+    this.openSnackBarOnSend();
   }
 
   public removeQuestions(i: number) {
@@ -64,11 +78,13 @@ export class AddTestPage {
   public initVariants(): FormGroup {
     return this._formBuilder.group({
       var_text: '',
-      question_id: this._questionId
+      question_id: this._questionId,
+      id: this._variantId
     })
   }
 
   public addVariant(question) {
+    this._variantId++;
     let questionsForms = <FormArray>this.testForm.controls['questions'];
     let variantsForms =  <FormArray>questionsForms.controls[question.controls.id.value];
     const CONTROL = variantsForms.controls['variants'];

@@ -19,24 +19,26 @@
 
 .answer {
   cursor: pointer;
-  background-color: #dde5e6;
-  border-radius: 5px;
+  left: 0;
   padding: 3px 3px 3px 30px;
   margin: 7px;
   font: 14px Roboto,"Helvetica Neue",sans-serif;
-  transition: .5s;
+  transition: .2s;
     &:hover {
-      background-color: #a9b0b1;
-      color: #fff;
+      position: relative;
+      left: 10px;
     }
 }
 
 .question-counter {
   float: right;
   font: 10px Roboto,"Helvetica Neue",sans-serif;
+  margin: 5px;
 }
 
 .timer {
   position: relative;
   left: 60%;
 }
+
+

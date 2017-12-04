@@ -13,6 +13,4 @@ export class TestModel {
   id: number;
   test_name: string;
   questions: QuestionModel[];
-
-  constructor(model?) {}
 }

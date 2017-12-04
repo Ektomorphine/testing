@@ -3,12 +3,15 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "ng": "ng",
-    "start": "ng serve",
+    "start": "concurrently \"npm run ng\"  \"npm run server-tests\" \"npm run server-answers\"",
+    "ng": "ng serve",
+    "server-tests": "json-server src/tests.json --watch",
+    "server-answers": "json-server src/answers.json --port 3001 --watch",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
+
   },
   "private": true,
   "dependencies": {
@@ -23,6 +26,7 @@
     "@angular/platform-browser": "^5.0.1",
     "@angular/platform-browser-dynamic": "^5.0.1",
     "@angular/router": "^5.0.1",
+    "concurrently": "^3.5.1",
     "core-js": "^2.4.1",
     "font-awesome": "^4.7.0",
     "material": "^0.2.6",

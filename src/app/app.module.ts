@@ -13,6 +13,7 @@ import { TestPage } from './pages/test/test.page';
 import { SelectTestPage } from './pages/select-test/select-test.page';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { AddTestPage } from './pages/add-test/add-test.page';
+import { PreviewPage } from './pages/preview/preview.page';
 
 import { TestService } from './services/test.service';
 
@@ -25,6 +26,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatInputModule } from '@angular/material/input';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -32,7 +34,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     TestPage,
     NavbarComponent,
     SelectTestPage,
-    AddTestPage
+    AddTestPage,
+    PreviewPage
   ],
   imports: [
     BrowserModule,
@@ -48,7 +51,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     MatProgressSpinnerModule,
     ReactiveFormsModule,
     MatInputModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatDialogModule
   ],
   providers: [TestService],
   bootstrap: [AppComponent]
