@@ -9,5 +9,5 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 export class PreviewPage  {
   constructor(public dialogRef: MatDialogRef<PreviewPage>,
-              @Inject(MAT_DIALOG_DATA) public data: any) {}
+              @Inject(MAT_DIALOG_DATA) public data) {}
 }

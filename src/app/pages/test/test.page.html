@@ -10,18 +10,22 @@
     <mat-spinner class="spinner"></mat-spinner>
 </div>
 <div class="container" *ngIf="questions[iteration]">
-  <div class="question"> {{questions[iteration].question_text}} </div>
+  <div class="question">
+    <markdown [data]="splitCodeMarkdown(questions[iteration].question_text)">
+    </markdown>
+  </div>
   <hr>
   <div *ngFor="let variant of variants">
     <mat-card *ngIf="questions[iteration].id == variant.question_id"
          class="answer"
          (click)="openNextQuestion(questions[iteration],variant)">
-      <markdown [data]="variant.var_text">
+      <markdown [data]="splitCodeMarkdown(variant.var_text)">
       </markdown>
     </mat-card>
   </div>
   <div class="question-counter">
     Вопрос {{iteration+1}} / {{questions.length}}
   </div>
+  <pre> {{t}} </pre>
 </div>
 

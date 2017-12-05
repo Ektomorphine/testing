@@ -2,7 +2,7 @@
 
 .header {
   background-color: $header-bgc;
-  box-shadow: 0 -1px 18px 5px rgba(50, 50, 50, 1);
+  box-shadow: $box-shadow;
   color: $text-color-header;
   display: flex;
   height: 65px;

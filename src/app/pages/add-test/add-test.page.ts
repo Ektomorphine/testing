@@ -53,9 +53,10 @@ export class AddTestPage {
      data: {preview: this.markdownPreview}
    });
 
-   dialog.afterClosed().subscribe(result => {
+   dialog.afterClosed()
+     .subscribe(result => {
      this.markdownPreview = result;
-   });
+     });
   }
 
   public addQuestion() {
@@ -66,7 +67,8 @@ export class AddTestPage {
   }
 
   public saveTest(model) {
-    this._testService.setTest(model.value);
+    this._testService
+      .setTest(model.value);
     this.openSnackBarOnSend();
   }
 
@@ -96,9 +98,5 @@ export class AddTestPage {
     let variantsForms =  <FormArray>questionsForms.controls[question.controls.id.value];
     const CONTROL = variantsForms.controls['variants'];
     CONTROL.removeAt(j)
-  }
-
-  public hooj(item?): void {
-    console.log(this.testForm.valid);
   }
 }

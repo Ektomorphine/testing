@@ -23,7 +23,6 @@ export class TestService {
   }
 
   public setAnswers(body): any {
-    console.log('ok');
     return this._testService.post(ANSWERS_URL, body).subscribe();
   }
 }

@@ -11,7 +11,8 @@ const routes: Routes = [
   { path: 'select', component: SelectTestPage },
   { path: 'test/:id', component: TestPage },
   { path: 'add', component: AddTestPage },
-  { path: 'preview', component: PreviewPage }
+  { path: 'preview', component: PreviewPage },
+  { path: '**', redirectTo: '/select'}
   ];
 
 @NgModule({

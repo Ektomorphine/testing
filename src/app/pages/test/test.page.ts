@@ -1,7 +1,11 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { TestService } from '../../services/test.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { TestModel, QuestionModel, VariantsModel } from '../../models/test.model';
+import {
+  TestModel,
+  QuestionModel,
+  VariantsModel
+} from '../../models/test.model';
 import { TestResult, TestAnswerResult } from '../../models/answers.model';
 import { Observable } from 'rxjs/Rx';
 import { Subscription } from 'rxjs/Subscription';
@@ -20,7 +24,6 @@ export class TestPage implements OnInit{
   public timer = 30;
   private subscription: Subscription;
   private _submitTestModel: TestResult;
-  private _submitTestAnswersModel: TestAnswerResult[] = [];
 
   constructor(private _testService: TestService,
               private _activatedRoute: ActivatedRoute,
@@ -76,8 +79,16 @@ export class TestPage implements OnInit{
       this._submitTestModel
         .addElement(new TestAnswerResult(question.id, variant.id));
     }
+  }
 
-
+  public splitCodeMarkdown(arg) {
+    let subString = arg.split(' ');
+    subString.forEach((newString, index) => {
+      if (subString.indexOf('```') == 0) {
+        subString[index] = `\n${newString}\n`;
+      }
+    })
+    return arg = subString.join(' ');
   }
 
   ngOnDestroy() {
