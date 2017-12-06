@@ -13,6 +13,7 @@ import { SelectTestPage } from './pages/select-test/select-test.page';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { AddTestPage } from './pages/add-test/add-test.page';
 import { PreviewPage } from './pages/preview/preview.page';
+import { EditTestPage } from './pages/edit-test/edit-test.page';
 
 import { TestService } from './services/test.service';
 
@@ -26,8 +27,12 @@ import {
   MatProgressSpinnerModule,
   MatInputModule,
   MatSnackBarModule,
-  MatDialogModule
+  MatDialogModule,
+  MatExpansionModule
 } from '@angular/material';
+
+import { ContextMenuModule } from 'ngx-contextmenu';
+
 
 @NgModule({
   declarations: [
@@ -36,7 +41,8 @@ import {
     NavbarComponent,
     SelectTestPage,
     AddTestPage,
-    PreviewPage
+    PreviewPage,
+    EditTestPage
   ],
   imports: [
     BrowserModule,
@@ -53,7 +59,9 @@ import {
     ReactiveFormsModule,
     MatInputModule,
     MatSnackBarModule,
-    MatDialogModule
+    MatDialogModule,
+    MatExpansionModule,
+    ContextMenuModule
   ],
   providers: [TestService],
   bootstrap: [AppComponent]

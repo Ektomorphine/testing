@@ -1,0 +1,35 @@
+<mat-toolbar color="warn">
+  <mat-toolbar-row>
+    <span *ngIf="test">Изменить: {{test.test_name}} </span>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+<div class="container">
+  <form [formGroup]="newTestForm">
+    <div class="question-edit-panel" *ngFor="let question of questions">
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            {{question.question_text}}
+          </mat-panel-title>
+          <mat-panel-description>
+            Текст вопроса
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <h3> Изменить вопрос </h3>
+        <mat-form-field class="edit-form">
+         <input matInput  [(ngModel)]="question.question_text" formControlName="test_name">
+        </mat-form-field>
+        <h3> Изменить варианты ответов </h3>
+        <div *ngFor="let variant of variants">
+          <span *ngIf="variant.question_id == question.id">
+            <mat-form-field class="edit-form">
+             <input matInput [(ngModel)]="variant.var_text">
+            </mat-form-field>
+          </span>
+        </div>
+      </mat-expansion-panel>
+    </div>
+    <button (click)="hooj(newTestForm)">fff</button>
+  </form>
+</div>

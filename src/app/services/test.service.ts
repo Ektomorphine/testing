@@ -15,7 +15,7 @@ export class TestService {
   constructor(private _testService: HttpClient) {}
 
   public getTest(id?: number): any {
-    return this._testService.get(id ? TESTS_URL + '/' + id : TESTS_URL);
+    return this._testService.get(id ? TESTS_URL + '/' + id : TESTS_URL)
   }
 
   public setTest(body): any {

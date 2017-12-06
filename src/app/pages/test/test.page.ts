@@ -21,7 +21,7 @@ export class TestPage implements OnInit{
   public questions: QuestionModel[] = [];
   public variants: VariantsModel[] = [];
   public iteration = 0;
-  public timer = 30;
+  public timer = 3000;
   private subscription: Subscription;
   private _submitTestModel: TestResult;
 
@@ -54,6 +54,7 @@ export class TestPage implements OnInit{
           this.checkTestEnd()
         }
     });
+    console.log(this._router);
   }
 
   public checkTestEnd() {
@@ -84,7 +85,7 @@ export class TestPage implements OnInit{
   public splitCodeMarkdown(arg) {
     let subString = arg.split(' ');
     subString.forEach((newString, index) => {
-      if (subString.indexOf('```') == 0) {
+      if (newString.indexOf('```') == 0) {
         subString[index] = `\n${newString}\n`;
       }
     })

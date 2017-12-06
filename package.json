@@ -15,7 +15,7 @@
   "private": true,
   "dependencies": {
     "@angular/animations": "^5.0.1",
-    "@angular/cdk": "^5.0.0-rc.2",
+    "@angular/cdk": "^5.0.0-rc.3",
     "@angular/common": "^5.0.1",
     "@angular/compiler": "^5.0.1",
     "@angular/core": "^5.0.1",
@@ -29,6 +29,7 @@
     "core-js": "^2.4.1",
     "font-awesome": "^4.7.0",
     "material": "^0.2.6",
+    "ngx-contextmenu": "^3.0.2",
     "ngx-markdown": "^1.4.0",
     "rxjs": "^5.4.2",
     "zone.js": "^0.8.14"

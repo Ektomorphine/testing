@@ -42,7 +42,7 @@ export class AddTestPage {
   }
 
   public openSnackBarOnSend() {
-    this.snackBar.open('Готово!', '', {
+    this.snackBar.open('Готово!', ':>', {
       duration: 1500
     });
   }
@@ -50,7 +50,7 @@ export class AddTestPage {
   public openDialogPreviewPage(): void {
    let dialog = this.dialog.open(PreviewPage, {
      width: '100%',
-     data: {preview: this.markdownPreview}
+     data: { preview: this.markdownPreview }
    });
 
    dialog.afterClosed()
@@ -66,9 +66,9 @@ export class AddTestPage {
     CONTROL.push(this.initQuestions());
   }
 
-  public saveTest(model) {
+  public saveTest(testResult) {
     this._testService
-      .setTest(model.value);
+      .setTest(testResult.value);
     this.openSnackBarOnSend();
   }
 

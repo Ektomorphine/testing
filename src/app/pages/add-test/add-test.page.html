@@ -18,8 +18,8 @@
               <div *ngFor="let variant of question.controls.variants.controls; let j = index ">
                 <div [formGroupName]="j">
                   <mat-form-field class="variant-field">
-                    <input type="text" formControlName="var_text" matInput placeholder="Текст ответа">
-                    <!-- <input type="hidden" formControlName="id" [value]="j"> -->
+                    <textarea type="text" formControlName="var_text" matInput placeholder="Текст ответа">
+                    </textarea>
                   </mat-form-field>
                   <img src="assets/trash.svg"
                        class="delete-variant-icon"

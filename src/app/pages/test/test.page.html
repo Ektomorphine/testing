@@ -11,7 +11,7 @@
 </div>
 <div class="container" *ngIf="questions[iteration]">
   <div class="question">
-    <markdown [data]="splitCodeMarkdown(questions[iteration].question_text)">
+    <markdown [data]="questions[iteration].question_text">
     </markdown>
   </div>
   <hr>
@@ -19,7 +19,7 @@
     <mat-card *ngIf="questions[iteration].id == variant.question_id"
          class="answer"
          (click)="openNextQuestion(questions[iteration],variant)">
-      <markdown [data]="splitCodeMarkdown(variant.var_text)">
+      <markdown [data]="variant.var_text">
       </markdown>
     </mat-card>
   </div>
