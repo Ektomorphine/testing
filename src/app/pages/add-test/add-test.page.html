@@ -5,20 +5,29 @@
   </mat-toolbar>
   <form class="container" [formGroup]="testForm" novalidate>
     <mat-form-field>
-      <input type="text" matInput placeholder="Название теста" formControlName="test_name">
+      <input type="text"
+             matInput
+             placeholder="Название теста"
+             formControlName="test_name">
     </mat-form-field>
     <div formArrayName="questions">
       <div *ngFor="let question of testForm.controls.questions.controls; let i = index ">
         <mat-card class="question-block">
           <div [formGroupName]="i" class="question-form">
             <mat-form-field class="question-field" >
-              <input type="text" formControlName="question_text" matInput placeholder="Текст вопроса">
+              <textarea type="text"
+                        formControlName="question_text"
+                        matInput placeholder="Текст вопроса">
+              </textarea>
             </mat-form-field>
             <div formArrayName="variants">
               <div *ngFor="let variant of question.controls.variants.controls; let j = index ">
                 <div [formGroupName]="j">
                   <mat-form-field class="variant-field">
-                    <textarea type="text" formControlName="var_text" matInput placeholder="Текст ответа">
+                    <textarea type="text"
+                              formControlName="var_text"
+                              matInput
+                              placeholder="Текст ответа">
                     </textarea>
                   </mat-form-field>
                   <img src="assets/trash.svg"
@@ -27,7 +36,9 @@
                 </div>
               </div>
             </div>
-            <button mat-raised-button color="primary" (click)="addVariant(question)">
+            <button mat-raised-button
+                    color="primary"
+                    (click)="addVariant(question)">
               Добавить вариант ответа
             </button>
             <img src="assets/trash.svg"

@@ -49,8 +49,9 @@ export class EditTestPage implements OnInit {
   }
 
   public initQuestions(): FormGroup {
+    if (this.test)
     return this._formBuilder.group({
-      question_text: ['',
+      question_text: [[this.test.questions[0]],
         [Validators.required, Validators.minLength(5)]],
       id: '',
       variants: this._formBuilder.array([

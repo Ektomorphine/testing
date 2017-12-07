@@ -18,13 +18,13 @@
         </mat-expansion-panel-header>
         <h3> Изменить вопрос </h3>
         <mat-form-field class="edit-form">
-         <input matInput  [(ngModel)]="question.question_text" formControlName="test_name">
+         <input matInput>
         </mat-form-field>
         <h3> Изменить варианты ответов </h3>
         <div *ngFor="let variant of variants">
           <span *ngIf="variant.question_id == question.id">
             <mat-form-field class="edit-form">
-             <input matInput [(ngModel)]="variant.var_text">
+             <input matInput>
             </mat-form-field>
           </span>
         </div>
