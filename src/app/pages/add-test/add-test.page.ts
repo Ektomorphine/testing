@@ -33,7 +33,7 @@ export class AddTestPage {
 
   public initQuestions(): FormGroup {
     return this._formBuilder.group({
-      question_text: ['',[Validators.required, Validators.minLength(5)]],
+      question_text: [' ', [Validators.required, Validators.minLength(5)]],
       id: this._questionId,
       variants: this._formBuilder.array([
         this.initVariants()
@@ -98,5 +98,10 @@ export class AddTestPage {
     let variantsForms =  <FormArray>questionsForms.controls[question.controls.id.value];
     const CONTROL = variantsForms.controls['variants'];
     CONTROL.removeAt(j)
+  }
+
+  hooj(item) {
+
+    console.log(item, this.testForm.controls);
   }
 }

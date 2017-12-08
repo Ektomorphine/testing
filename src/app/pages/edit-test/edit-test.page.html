@@ -3,33 +3,43 @@
     <span *ngIf="test">Изменить: {{test.test_name}} </span>
   </mat-toolbar-row>
 </mat-toolbar>
-
+<button mat-raised-button
+        (click)="addQuestion()"
+        class="add-question-button"
+        color="primary">
+  Добавить вопрос
+</button>
 <div class="container">
-  <form [formGroup]="newTestForm">
-    <div class="question-edit-panel" *ngFor="let question of questions">
-      <mat-expansion-panel>
-        <mat-expansion-panel-header>
-          <mat-panel-title>
-            {{question.question_text}}
-          </mat-panel-title>
-          <mat-panel-description>
-            Текст вопроса
-          </mat-panel-description>
-        </mat-expansion-panel-header>
-        <h3> Изменить вопрос </h3>
-        <mat-form-field class="edit-form">
-         <input matInput>
-        </mat-form-field>
-        <h3> Изменить варианты ответов </h3>
-        <div *ngFor="let variant of variants">
-          <span *ngIf="variant.question_id == question.id">
-            <mat-form-field class="edit-form">
-             <input matInput>
-            </mat-form-field>
-          </span>
-        </div>
-      </mat-expansion-panel>
-    </div>
-    <button (click)="hooj(newTestForm)">fff</button>
+  <form *ngIf="newTestForm" [formGroup]="newTestForm" novalidate>
+    <h3 class="">Изменить название теста</h3>
+      <mat-form-field>
+        <input matInput formControlName="test_name">
+      </mat-form-field>
+    <div formArrayName="questions">
+      <div [formGroupName]="i" class="question-edit-panel" *ngFor="let question of newTestForm.controls.questions.value.controls; let i = index ">
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              {{question.question_text}}
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <h3> Изменить вопрос </h3>
+          <mat-form-field class="edit-form">
+            <input matInput formControlName="question_text">
+          </mat-form-field>
+
+          <h3> Изменить варианты ответов </h3>
+          <div *ngFor="let variant of variants" >
+            <span *ngIf="variant.question_id == question.id">
+              <mat-form-field class="edit-form">
+               <input matInput >
+              </mat-form-field>
+            </span>
+          </div>
+        </mat-expansion-panel>
+      </div>
+      <button (click)="hooj(newTestForm)">fff</button>
+  </div>
   </form>
 </div>
+

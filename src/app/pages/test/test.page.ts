@@ -82,15 +82,15 @@ export class TestPage implements OnInit{
     }
   }
 
-  public splitCodeMarkdown(arg) {
-    let subString = arg.split(' ');
-    subString.forEach((newString, index) => {
-      if (newString.indexOf('```') == 0) {
-        subString[index] = `\n${newString}\n`;
-      }
-    })
-    return arg = subString.join(' ');
-  }
+  // public splitCodeMarkdown(arg) {
+  //   let subString = arg.split(' ');
+  //   subString.forEach((newString, index) => {
+  //     if (newString.indexOf('```') == 0) {
+  //       subString[index] = `\n${newString}\n`;
+  //     }
+  //   })
+  //   return arg = subString.join(' ');
+  // }
 
   ngOnDestroy() {
     this.subscription.unsubscribe();

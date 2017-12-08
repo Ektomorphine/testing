@@ -1,71 +1,72 @@
-  <mat-toolbar color="warn">
-    <mat-toolbar-row>
-      <span> Добавить тест </span>
-    </mat-toolbar-row>
-  </mat-toolbar>
-  <form class="container" [formGroup]="testForm" novalidate>
-    <mat-form-field>
-      <input type="text"
-             matInput
-             placeholder="Название теста"
-             formControlName="test_name">
-    </mat-form-field>
-    <div formArrayName="questions">
-      <div *ngFor="let question of testForm.controls.questions.controls; let i = index ">
-        <mat-card class="question-block">
-          <div [formGroupName]="i" class="question-form">
-            <mat-form-field class="question-field" >
-              <textarea type="text"
-                        formControlName="question_text"
-                        matInput placeholder="Текст вопроса">
-              </textarea>
-            </mat-form-field>
-            <div formArrayName="variants">
-              <div *ngFor="let variant of question.controls.variants.controls; let j = index ">
-                <div [formGroupName]="j">
-                  <mat-form-field class="variant-field">
-                    <textarea type="text"
-                              formControlName="var_text"
-                              matInput
-                              placeholder="Текст ответа">
-                    </textarea>
-                  </mat-form-field>
-                  <img src="assets/trash.svg"
-                       class="delete-variant-icon"
-                       (click)="removeVariant(j, question)">
-                </div>
+<mat-toolbar color="warn">
+  <mat-toolbar-row>
+    <span> Добавить тест </span>
+  </mat-toolbar-row>
+</mat-toolbar>
+<form class="container" [formGroup]="testForm" novalidate>
+  <mat-form-field>
+    <input type="text"
+           matInput
+           placeholder="Название теста"
+           formControlName="test_name">
+  </mat-form-field>
+  <div formArrayName="questions">
+    <div *ngFor="let question of testForm.controls.questions.controls; let i = index ">
+      <mat-card class="question-block">
+        <div [formGroupName]="i" class="question-form">
+          <mat-form-field class="question-field" >
+            <textarea type="text"
+                      formControlName="question_text"
+                      matInput placeholder="Текст вопроса">
+            </textarea>
+          </mat-form-field>
+          <div formArrayName="variants">
+            <div *ngFor="let variant of question.controls.variants.controls; let j = index ">
+              <div [formGroupName]="j">
+                <mat-form-field class="variant-field">
+                  <textarea type="text"
+                            formControlName="var_text"
+                            matInput
+                            placeholder="Текст ответа">
+                  </textarea>
+                </mat-form-field>
+                <img src="assets/trash.svg"
+                     class="delete-variant-icon"
+                     (click)="removeVariant(j, question)">
               </div>
             </div>
-            <button mat-raised-button
-                    color="primary"
-                    (click)="addVariant(question)">
-              Добавить вариант ответа
-            </button>
-            <img src="assets/trash.svg"
-                 class="delete-question-icon"
-                 (click)="removeQuestions(i)"
-                 [hidden]="i == 0">
           </div>
-        </mat-card>
-      </div>
+          <button mat-raised-button
+                  color="primary"
+                  (click)="addVariant(question)">
+            Добавить вариант ответа
+          </button>
+          <img src="assets/trash.svg"
+               class="delete-question-icon"
+               (click)="removeQuestions(i)"
+               [hidden]="i == 0">
+        </div>
+      </mat-card>
     </div>
-      <button mat-raised-button
-              (click)="addQuestion()"
-              class="add-question-button"
-              color="primary">
-        Добавить вопрос
-      </button>
-      <button class="send-test-button"
-              mat-raised-button
-              color="primary"
-              (click)="saveTest(testForm)"
-              [disabled]="!testForm.valid">
-        Отправить
-      </button>
-      <button class="send-test-button"
-              mat-raised-button
-              color="primary"
-              (click)="openDialogPreviewPage()">
-        Просмотр превью
-      </button>
-  </form>
+  </div>
+    <button mat-raised-button
+            (click)="addQuestion()"
+            class="add-question-button"
+            color="primary">
+      Добавить вопрос
+    </button>
+    <button (click)="hooj(testForm)"></button>
+    <button class="send-test-button"
+            mat-raised-button
+            color="primary"
+            (click)="saveTest(testForm)"
+            [disabled]="!testForm.valid">
+      Отправить
+    </button>
+    <button class="send-test-button"
+            mat-raised-button
+            color="primary"
+            (click)="openDialogPreviewPage()">
+      Просмотр превью
+    </button>
+</form>

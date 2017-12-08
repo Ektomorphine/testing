@@ -32,40 +32,51 @@ export class EditTestPage implements OnInit {
       .subscribe(
         data => {
           this.test = data;
-          this.test.questions.forEach(item => {
-            this.questions.push(item);
-            item.variants.forEach(variants => {
-              this.variants.push(variants);
-            })
-          })
+          this.setForm(data);
+          // console.log(data.questions);
+          // data.questions.forEach(item => console.log(item.variants));
+          // this.test.questions.forEach(item => {
+          //   this.questions.push(item);
+          //   item.variants.forEach(variants => {
+          //     this.variants.push(variants);
+          //   })
+          // })
         }
       )
-    this.newTestForm = this._formBuilder.group({
-      test_name: ['', [Validators.required, Validators.minLength(5)]],
-      questions: this._formBuilder.array([
-        this.initQuestions()
-        ])
-    })
   }
 
-  public initQuestions(): FormGroup {
-    if (this.test)
+  public setForm(data): void {
+      this.newTestForm = this._formBuilder.group({
+      test_name: [ data.test_name, [Validators.required, Validators.minLength(5)]],
+      questions: [ this._formBuilder.array([
+                this.initQuestions(data)
+              ])]
+    })
+      console.log(this.newTestForm.controls.questions.value.controls);
+  }
+
+  public initQuestions(data?): FormGroup {
+    console.log(data.questions);
     return this._formBuilder.group({
-      question_text: [[this.test.questions[0]],
-        [Validators.required, Validators.minLength(5)]],
+      question_text: [ data.questions],
       id: '',
       variants: this._formBuilder.array([
-        this.initVariants()
+        this.initVariants(data)
         ])
     })
   }
 
-  public initVariants(): FormGroup {
+  public initVariants(data): FormGroup {
     return this._formBuilder.group({
-      var_text: '',
+      var_text: [ data.variants ],
       question_id: '',
       id: ''
     })
+  }
+
+  public addQuestion() {
+    const CONTROL = <FormArray>this.newTestForm.controls['questions'];
+    CONTROL.push(this.initQuestions());
   }
 
   hooj(item) {
