@@ -1,45 +1,44 @@
 <mat-toolbar color="warn">
   <mat-toolbar-row>
-    <span *ngIf="test">Изменить: {{test.test_name}} </span>
+    <span *ngIf="tests">Изменить: {{tests.test_name}} </span>
   </mat-toolbar-row>
 </mat-toolbar>
-<button mat-raised-button
-        (click)="addQuestion()"
-        class="add-question-button"
-        color="primary">
-  Добавить вопрос
-</button>
-<div class="container">
-  <form *ngIf="newTestForm" [formGroup]="newTestForm" novalidate>
-    <h3 class="">Изменить название теста</h3>
-      <mat-form-field>
-        <input matInput formControlName="test_name">
-      </mat-form-field>
-    <div formArrayName="questions">
-      <div [formGroupName]="i" class="question-edit-panel" *ngFor="let question of newTestForm.controls.questions.value.controls; let i = index ">
-        <mat-expansion-panel>
-          <mat-expansion-panel-header>
-            <mat-panel-title>
-              {{question.question_text}}
-            </mat-panel-title>
-          </mat-expansion-panel-header>
-          <h3> Изменить вопрос </h3>
-          <mat-form-field class="edit-form">
-            <input matInput formControlName="question_text">
-          </mat-form-field>
+<button type="button" (click)="addQuestion()">+</button>
+<button type="button" (click)="revert()">revert</button>
+<button type="button" (click)="func()">clog</button>
 
-          <h3> Изменить варианты ответов </h3>
-          <div *ngFor="let variant of variants" >
-            <span *ngIf="variant.question_id == question.id">
-              <mat-form-field class="edit-form">
-               <input matInput >
-              </mat-form-field>
-            </span>
-          </div>
-        </mat-expansion-panel>
+<ng-container *ngIf="tests">
+
+  <form [formGroup]="newTestForm" novalidate>
+    <div class="container">
+      <label>Test Name:
+        <input formControlName="test_name">
+      </label>
+    <hr>
+    {{newTestForm.value | json}}
+    <hr>
+    </div>
+
+    <div class="container"
+         style="margin: 10px; background-color: green"
+         formArrayName="questionForms" *ngIf="newTestForm">
+      <div *ngFor="let question of questionForms.controls;
+                   let i = index"
+                   [formGroupName]="i">
+        <h4>Question #{{i + 1}}</h4>
+        <label>Question text
+          <input formControlName="question_text">
+        </label>
+        <!-- {{question.controls.variants.value.var_text}} -->
+       <!--  <ng-container *ngFor="let variant of variantForms.control;
+                      let j = index"
+                      [formGroupName]="j">
+          <input formControlName="var_text">
+
+        </ng-container> -->
+
+        <hr>
       </div>
-      <button (click)="hooj(newTestForm)">fff</button>
-  </div>
+    </div>
   </form>
-</div>
-
+</ng-container>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnChanges, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router'
 import { TestService } from '../../services/test.service';
 import { Observable } from 'rxjs/Rx';
@@ -16,71 +16,81 @@ import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
   templateUrl: './edit-test.page.html',
   styleUrls: ['./edit-test.page.scss']
 })
-export class EditTestPage implements OnInit {
+export class EditTestPage implements OnInit, OnChanges {
 
-  public test: TestModel;
+  @Input() test: TestModel;
+
+  public tests: TestModel;
   public questions: QuestionModel[] = [];
   public variants: VariantsModel[] = [];
   public newTestForm: FormGroup;
 
   constructor(private _activatedRoute: ActivatedRoute,
               private _testService: TestService,
-              private _formBuilder: FormBuilder) {}
+              private _formBuilder: FormBuilder) {
+    this.createForm();
+  }
 
   ngOnInit() {
     this._testService.getTest(+this._activatedRoute.snapshot.params['id'])
       .subscribe(
         data => {
-          this.test = data;
-          this.setForm(data);
-          // console.log(data.questions);
-          // data.questions.forEach(item => console.log(item.variants));
-          // this.test.questions.forEach(item => {
-          //   this.questions.push(item);
-          //   item.variants.forEach(variants => {
-          //     this.variants.push(variants);
-          //   })
-          // })
+          console.log('okInit');
+          this.tests = data;
+          this.createForm();
+          this.ngOnChanges()
+          this.tests.questions.forEach(item => {
+            this.questions.push(item);
+            item.variants.forEach(variants => {
+              this.variants.push(variants);
+            })
+          })
         }
       )
   }
 
-  public setForm(data): void {
-      this.newTestForm = this._formBuilder.group({
-      test_name: [ data.test_name, [Validators.required, Validators.minLength(5)]],
-      questions: [ this._formBuilder.array([
-                this.initQuestions(data)
-              ])]
-    })
-      console.log(this.newTestForm.controls.questions.value.controls);
+  ngOnChanges() {
+      console.log(typeof(this.tests.questions), typeof(<VariantsModel[]>this.variants));
+      this.newTestForm.reset({
+        test_name: this.tests.test_name
+      });
+      this.setForms(<QuestionModel[]>this.tests.questions, 'questionForms');
+      this.setForms(<VariantsModel[]>this.variants, 'variantForms');
   }
 
-  public initQuestions(data?): FormGroup {
-    console.log(data.questions);
-    return this._formBuilder.group({
-      question_text: [ data.questions],
-      id: '',
-      variants: this._formBuilder.array([
-        this.initVariants(data)
-        ])
-    })
+  public createForm(): void {
+    this.newTestForm = this._formBuilder.group({
+      test_name: ['', Validators.required],
+      questionForms: this._formBuilder.array([]),
+      variantForms: this._formBuilder.array([])
+    });
   }
 
-  public initVariants(data): FormGroup {
-    return this._formBuilder.group({
-      var_text: [ data.variants ],
-      question_id: '',
-      id: ''
+  public get questionForms(): FormArray {
+    return this.newTestForm.get('questionForms') as FormArray;
+  }
+
+  public get variantForms(): FormArray {
+    return this.newTestForm.get('variantForms') as FormArray;
+  }
+
+  public setForms(formItem: any, formType) {
+    const ITEMS_FG = formItem.map(item => {
+      console.log(item,'hooj');
+      return this._formBuilder.group(item)
     })
+    const ITEMS_FA = this._formBuilder.array(ITEMS_FG);
+    this.newTestForm.setControl(formType, ITEMS_FA);
   }
 
   public addQuestion() {
-    const CONTROL = <FormArray>this.newTestForm.controls['questions'];
-    CONTROL.push(this.initQuestions());
+    this.questionForms.push(this._formBuilder.group(new TestModel()));
   }
 
-  hooj(item) {
-    console.log(item);
+  revert() { this.ngOnChanges() }
+
+  func() {
+    console.log(this.questionForms, this.variantForms);
   }
 
 }
