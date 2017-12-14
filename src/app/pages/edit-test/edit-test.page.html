@@ -1,44 +1,71 @@
 <mat-toolbar color="warn">
   <mat-toolbar-row>
-    <span *ngIf="tests">Изменить: {{tests.test_name}} </span>
+    <span *ngIf="tests">Изменить: {{newTestForm.controls.test_name.value}} </span>
   </mat-toolbar-row>
 </mat-toolbar>
+
 <button type="button" (click)="addQuestion()">+</button>
 <button type="button" (click)="revert()">revert</button>
 <button type="button" (click)="func()">clog</button>
 
-<ng-container *ngIf="tests">
+<div class="container" *ngIf="!tests">
+  Loading...
+</div>
 
+<div class="container" *ngIf="tests">
   <form [formGroup]="newTestForm" novalidate>
-    <div class="container">
-      <label>Test Name:
-        <input formControlName="test_name">
-      </label>
-    <hr>
-    {{newTestForm.value | json}}
-    <hr>
-    </div>
+    <mat-form-field class="full-wd">
+      <mat-label>Изменить название теста</mat-label>
+      <input matInput formControlName="test_name">
+    </mat-form-field>
 
-    <div class="container"
-         style="margin: 10px; background-color: green"
-         formArrayName="questionForms" *ngIf="newTestForm">
-      <div *ngFor="let question of questionForms.controls;
-                   let i = index"
-                   [formGroupName]="i">
-        <h4>Question #{{i + 1}}</h4>
-        <label>Question text
-          <input formControlName="question_text">
-        </label>
-        <!-- {{question.controls.variants.value.var_text}} -->
-       <!--  <ng-container *ngFor="let variant of variantForms.control;
-                      let j = index"
-                      [formGroupName]="j">
-          <input formControlName="var_text">
-
-        </ng-container> -->
-
-        <hr>
-      </div>
-    </div>
+    <ng-container formArrayName="questionForms"
+                  *ngFor="let question of questionForms.controls;
+                  let i = index ">
+      <mat-expansion-panel class="question-edit-panel" [formGroupName]="i">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            #{{i + 1}}
+          </mat-panel-title>
+          <mat-panel-description>
+            {{question.controls.question_text.value}}
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <h3> Текст вопроса </h3>
+        <mat-form-field class="full-wd">
+          <mat-label> Текст вопроса </mat-label>
+          <textarea matInput formControlName="question_text"></textarea>
+        </mat-form-field>
+        <ng-container formArrayName="variants">
+          <hr class="material">
+          <h3> Варианты ответов </h3>
+          <div *ngFor="let variant of question.controls.variants.controls;
+                let j = index "
+                [formGroupName]="j">
+            <mat-form-field class="full-wd">
+              <textarea matInput
+                        formControlName="var_text">
+              </textarea>
+            </mat-form-field>
+          </div>
+        </ng-container>
+      </mat-expansion-panel>
+    </ng-container>
+    <button mat-raised-button
+            color="primary"
+            (click)="addQuestion()">
+      Добавить вопрос
+    </button>
+    <button mat-raised-button
+            color="primary"
+            (click)="func(newTestForm)">
+      clog form value
+    </button>
   </form>
-</ng-container>
+</div>
+
+<div class="container">
+  <hr>
+    {{newTestForm.value | json}}
+  <hr>
+</div>

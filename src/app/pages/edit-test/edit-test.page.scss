@@ -11,10 +11,22 @@
   margin: 10px auto;
 }
 
-.edit-form {
-  width: 100%;
-}
-
 .test-name-change-logo {
   font:  14px/20px Roboto,"Helvetica Neue",sans-serif;
+}
+
+hr.material {
+  border: 0;
+  height: 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.variant-field {
+  display: inline-block;
+  width: calc(100% - 25px);
+}
+
+.full-wd {
+  width: 100%;
 }

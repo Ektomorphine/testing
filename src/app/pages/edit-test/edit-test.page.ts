@@ -41,28 +41,22 @@ export class EditTestPage implements OnInit, OnChanges {
           this.ngOnChanges()
           this.tests.questions.forEach(item => {
             this.questions.push(item);
-            item.variants.forEach(variants => {
-              this.variants.push(variants);
-            })
           })
         }
       )
   }
 
   ngOnChanges() {
-      console.log(typeof(this.tests.questions), typeof(<VariantsModel[]>this.variants));
       this.newTestForm.reset({
         test_name: this.tests.test_name
       });
       this.setForms(<QuestionModel[]>this.tests.questions, 'questionForms');
-      this.setForms(<VariantsModel[]>this.variants, 'variantForms');
   }
 
   public createForm(): void {
     this.newTestForm = this._formBuilder.group({
       test_name: ['', Validators.required],
-      questionForms: this._formBuilder.array([]),
-      variantForms: this._formBuilder.array([])
+      questionForms: this._formBuilder.array([])
     });
   }
 
@@ -70,13 +64,13 @@ export class EditTestPage implements OnInit, OnChanges {
     return this.newTestForm.get('questionForms') as FormArray;
   }
 
-  public get variantForms(): FormArray {
-    return this.newTestForm.get('variantForms') as FormArray;
-  }
-
-  public setForms(formItem: any, formType) {
+  public setForms(formItem: any, formType: string) {
     const ITEMS_FG = formItem.map(item => {
-      console.log(item,'hooj');
+      let variants = item.variants.map(variant => {
+        return this._formBuilder.group(variant)
+      })
+      variants = this._formBuilder.array(variants);
+      item.variants = variants
       return this._formBuilder.group(item)
     })
     const ITEMS_FA = this._formBuilder.array(ITEMS_FG);
@@ -84,13 +78,17 @@ export class EditTestPage implements OnInit, OnChanges {
   }
 
   public addQuestion() {
-    this.questionForms.push(this._formBuilder.group(new TestModel()));
+
+    this.questionForms.push(this._formBuilder
+      .group(new QuestionModel(this.questionForms.controls.length,
+        new VariantsModel())));
   }
 
   revert() { this.ngOnChanges() }
 
-  func() {
-    console.log(this.questionForms, this.variantForms);
+  func(item?) {
+    console.log(this.questionForms.controls.length);
+    console.log(item);
   }
 
 }

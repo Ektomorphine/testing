@@ -29,6 +29,7 @@ export class AddTestPage {
         this.initQuestions()
         ])
     })
+    this.hooj()
   }
 
   public initQuestions(): FormGroup {
@@ -100,8 +101,7 @@ export class AddTestPage {
     CONTROL.removeAt(j)
   }
 
-  hooj(item) {
-
-    console.log(item, this.testForm.controls);
+  hooj() {
+    console.log(this.testForm);
   }
 }

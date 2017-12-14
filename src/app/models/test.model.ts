@@ -1,12 +1,20 @@
+import { FormArray } from '@angular/forms';
+
 export class VariantsModel {
-  id: number;
-  var_text: string;
+  id: number = 0;
+  var_text: string = '';
 }
 
 export class QuestionModel {
-  id: number;
-  question_text: string;
-  variants: VariantsModel[];
+  id: number = 0;
+  question_text: string = '';
+  variants: VariantsModel[] = [];
+
+  constructor(setId?: number, setVariants?: VariantsModel) {
+    this.id = setId;
+    this.variants.push(setVariants)
+    console.log(this.variants);
+  }
 }
 
 export class TestModel {
