@@ -1,6 +1,6 @@
 <mat-toolbar color="warn">
   <mat-toolbar-row>
-    <span *ngIf="tests">Изменить: {{newTestForm.controls.test_name.value}} </span>
+    <span *ngIf="test">Изменить: {{newTestForm.controls.test_name.value}} </span>
   </mat-toolbar-row>
 </mat-toolbar>
 
@@ -8,11 +8,11 @@
 <button type="button" (click)="revert()">revert</button>
 <button type="button" (click)="func()">clog</button>
 
-<div class="container" *ngIf="!tests">
+<div class="container" *ngIf="!test">
   Loading...
 </div>
 
-<div class="container" *ngIf="tests">
+<div class="container" *ngIf="test">
   <form [formGroup]="newTestForm" novalidate>
     <mat-form-field class="full-wd">
       <mat-label>Изменить название теста</mat-label>
@@ -32,6 +32,7 @@
           </mat-panel-description>
         </mat-expansion-panel-header>
         <h3> Текст вопроса </h3>
+        <button (click)="removeQuestion(i)">Delete</button>
         <mat-form-field class="full-wd">
           <mat-label> Текст вопроса </mat-label>
           <textarea matInput formControlName="question_text"></textarea>
@@ -46,8 +47,10 @@
               <textarea matInput
                         formControlName="var_text">
               </textarea>
+              <button (click)="removeVariant(i,j)">del</button>
             </mat-form-field>
           </div>
+          <button (click)="addVariant(i)">Добавить вар</button>
         </ng-container>
       </mat-expansion-panel>
     </ng-container>
@@ -60,6 +63,11 @@
             color="primary"
             (click)="func(newTestForm)">
       clog form value
+    </button>
+    <button mat-raised-button
+            color="primary"
+            (click)="saveNewTest(newTestForm)">
+      Save
     </button>
   </form>
 </div>

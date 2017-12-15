@@ -1,8 +1,6 @@
-import { Component, OnInit, OnChanges, Input } from '@angular/core';
+import { Component, OnInit, OnChanges } from '@angular/core';
 import { ActivatedRoute } from '@angular/router'
 import { TestService } from '../../services/test.service';
-import { Observable } from 'rxjs/Rx';
-import { Subscription } from 'rxjs/Subscription';
 import {
   TestModel,
   QuestionModel,
@@ -18,11 +16,8 @@ import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 })
 export class EditTestPage implements OnInit, OnChanges {
 
-  @Input() test: TestModel;
-
-  public tests: TestModel;
-  public questions: QuestionModel[] = [];
-  public variants: VariantsModel[] = [];
+  public test: TestModel;
+  // public questions: QuestionModel[] = [];
   public newTestForm: FormGroup;
 
   constructor(private _activatedRoute: ActivatedRoute,
@@ -36,21 +31,18 @@ export class EditTestPage implements OnInit, OnChanges {
       .subscribe(
         data => {
           console.log('okInit');
-          this.tests = data;
-          this.createForm();
+          this.test = data;
           this.ngOnChanges()
-          this.tests.questions.forEach(item => {
-            this.questions.push(item);
-          })
+          // this.test.questions.forEach(item => this.questions.push(item))
         }
       )
   }
 
   ngOnChanges() {
       this.newTestForm.reset({
-        test_name: this.tests.test_name
+        test_name: this.test.test_name
       });
-      this.setForms(<QuestionModel[]>this.tests.questions, 'questionForms');
+      this.setForms(<QuestionModel[]>this.test.questions, 'questionForms');
   }
 
   public createForm(): void {
@@ -78,17 +70,41 @@ export class EditTestPage implements OnInit, OnChanges {
   }
 
   public addQuestion() {
-
+    let questionCounter = this.questionForms.controls.length
+    let x = this._formBuilder.array([]);
+    x.push(this._formBuilder.group(new VariantsModel(0, questionCounter)))
     this.questionForms.push(this._formBuilder
-      .group(new QuestionModel(this.questionForms.controls.length,
-        new VariantsModel())));
+      .group(new QuestionModel(questionCounter, x)));
   }
 
-  revert() { this.ngOnChanges() }
+  public removeQuestion(i: number) {
+    this.questionForms.removeAt(i);
+  }
+
+  public addVariant(i: number): void {
+    let FormArray = <FormArray>this.questionForms.controls[i];
+    let FormGroup = FormArray.controls['variants'];
+    FormGroup.push(this._formBuilder
+      .group(new VariantsModel(FormGroup.length, i)))
+  }
+
+  public removeVariant(i: number, j: number): void {
+    let FormArray = <FormArray>this.questionForms.controls[i];
+    let FormGroup = FormArray.controls['variants'];
+    FormGroup.removeAt(j);
+  }
+
+  public saveNewTest(newTest): void {
+    this._testService.updateTest(this.test.id, newTest.value);
+    console.log('okSave');
+  }
+
+  revert() {
+    this.newTestForm.reset();
+  }
 
   func(item?) {
-    console.log(this.questionForms.controls.length);
-    console.log(item);
+    console.log(this.questionForms.controls[0]['variants']);
   }
 
 }

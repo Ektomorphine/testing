@@ -88,7 +88,9 @@ export class AddTestPage {
 
   public addVariant(question) {
     this._variantId++;
+    // find *questions* FormArray
     let questionsForms = <FormArray>this.testForm.controls['questions'];
+    // Select FormGroup from FormArray by ID and convert it to FormArray
     let variantsForms =  <FormArray>questionsForms.controls[question.controls.id.value];
     const CONTROL = variantsForms.controls['variants'];
     CONTROL.push(this.initVariants());

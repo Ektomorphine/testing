@@ -2,9 +2,9 @@
   "tests": [
     {
       "test_name": "Тест с кодом",
-      "questions": [
+      "questionForms": [
         {
-          "question_text": "Из какого языка ```typescript let x = []; x.forEach ... ``` **вставка**?",
+          "question_text": "Из какого языка ```tyt x = []; x.forEach ... ``` **вставка**?",
           "id": 0,
           "variants": [
             {
