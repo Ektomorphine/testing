@@ -4,10 +4,6 @@
   </mat-toolbar-row>
 </mat-toolbar>
 
-<button type="button" (click)="addQuestion()">+</button>
-<button type="button" (click)="revert()">revert</button>
-<button type="button" (click)="func()">clog</button>
-
 <div class="container" *ngIf="!test">
   Loading...
 </div>
@@ -19,8 +15,8 @@
       <input matInput formControlName="test_name">
     </mat-form-field>
 
-    <ng-container formArrayName="questionForms"
-                  *ngFor="let question of questionForms.controls;
+    <ng-container formArrayName="questions"
+                  *ngFor="let question of questions.controls;
                   let i = index ">
       <mat-expansion-panel class="question-edit-panel" [formGroupName]="i">
         <mat-expansion-panel-header>
@@ -61,13 +57,9 @@
     </button>
     <button mat-raised-button
             color="primary"
-            (click)="func(newTestForm)">
-      clog form value
-    </button>
-    <button mat-raised-button
-            color="primary"
-            (click)="saveNewTest(newTestForm)">
-      Save
+            (click)="saveNewTest(newTestForm)"
+            [disabled]="!newTestForm.valid">
+      Сохранить изменения
     </button>
   </form>
 </div>

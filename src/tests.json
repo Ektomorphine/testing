@@ -236,16 +236,37 @@
       "id": 15
     },
     {
-      "test_name": "12322",
+      "test_name": "Только что отредактировал этот тест",
       "questions": [
         {
-          "question_text": "123ghg",
+          "question_text": "В жопу раз или вилкой в глаз?",
           "id": 0,
           "variants": [
             {
               "var_text": "```typescript  let kekus: number = 42; ```",
               "question_id": 0,
               "id": 0
+            },
+            {
+              "id": 1,
+              "var_text": "2234234",
+              "question_id": 0
+            }
+          ]
+        },
+        {
+          "id": 1,
+          "question_text": "Этот вопрос был добавлен в процессе редактирования",
+          "variants": [
+            {
+              "id": 0,
+              "var_text": "Огонь!",
+              "question_id": 1
+            },
+            {
+              "id": 1,
+              "var_text": "Ващпе агонь!",
+              "question_id": 1
             }
           ]
         }
