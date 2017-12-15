@@ -29,7 +29,6 @@ export class AddTestPage {
         this.initQuestions()
         ])
     })
-    this.hooj()
   }
 
   public initQuestions(): FormGroup {
