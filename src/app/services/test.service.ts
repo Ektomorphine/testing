@@ -14,6 +14,7 @@ export class TestService {
 
   constructor(private _http: HttpClient) {}
   // get tests from server
+  // if id => return test by id, else return all tests
   public getTest(id?: number): any {
     return this._http.get(id ? TESTS_URL + '/' + id : TESTS_URL)
   }
@@ -25,9 +26,13 @@ export class TestService {
   public setAnswers(body): any {
     return this._http.post(ANSWERS_URL, body).subscribe();
   }
-
+  //update test
   public updateTest(id: number, body): any {
     console.log('okUpdste');
-    return this._http.put(TESTS_URL + '/'+ id, body).subscribe();
+    return this._http.put(TESTS_URL + '/' + id, body).subscribe();
+  }
+
+  public deleteTest(id: number) {
+    return this._http.delete(TESTS_URL + '/' + id).subscribe();
   }
 }

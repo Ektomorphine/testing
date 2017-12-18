@@ -17,7 +17,8 @@
 
     <ng-container formArrayName="questions"
                   *ngFor="let question of questions.controls;
-                  let i = index ">
+                  let i = index "
+                  class="question-block">
       <mat-expansion-panel class="question-edit-panel" [formGroupName]="i">
         <mat-expansion-panel-header>
           <mat-panel-title>
@@ -27,8 +28,10 @@
             {{question.controls.question_text.value}}
           </mat-panel-description>
         </mat-expansion-panel-header>
-        <h3> Текст вопроса </h3>
-        <button (click)="removeQuestion(i)">Delete</button>
+        <h3 class="question-header"> Текст вопроса </h3>
+        <img src="assets/trash.svg"
+             class="delete-question-icon"
+             (click)="removeQuestion(i)">
         <mat-form-field class="full-wd">
           <mat-label> Текст вопроса </mat-label>
           <textarea matInput formControlName="question_text"></textarea>
@@ -43,10 +46,16 @@
               <textarea matInput
                         formControlName="var_text">
               </textarea>
-              <button (click)="removeVariant(i,j)">del</button>
             </mat-form-field>
+            <img src="assets/trash.svg"
+                 class="delete-variant-icon"
+                 (click)="removeVariant(i,j)">
           </div>
-          <button (click)="addVariant(i)">Добавить вар</button>
+          <button mat-raised-button
+                  color="primary"
+                  (click)="addVariant(i)">
+            Добавить вариант ответа
+          </button>
         </ng-container>
       </mat-expansion-panel>
     </ng-container>
@@ -62,10 +71,4 @@
       Сохранить изменения
     </button>
   </form>
-</div>
-
-<div class="container">
-  <hr>
-    {{newTestForm.value | json}}
-  <hr>
 </div>

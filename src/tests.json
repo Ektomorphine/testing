@@ -1,255 +1,25 @@
 {
   "tests": [
     {
-      "test_name": "Тест с кодом",
-      "questionForms": [
-        {
-          "question_text": "Из какого языка ```tyt x = []; x.forEach ... ``` **вставка**?",
-          "id": 0,
-          "variants": [
-            {
-              "var_text": "ХЗ",
-              "question_id": 0,
-              "id": 0
-            },
-            {
-              "var_text": "TS",
-              "question_id": 0,
-              "id": 1
-            },
-            {
-              "var_text": "JS!",
-              "question_id": 0,
-              "id": 2
-            },
-            {
-              "var_text": "А этот? ```typescript let x = []; x.forEach ... ```",
-              "question_id": 0,
-              "id": 3
-            }
-          ]
-        }
-      ],
-      "id": 10
-    },
-    {
-      "test_name": "**Test**",
+      "test_name": "Ghbds",
       "questions": [
         {
-          "question_text": "Allah akbar",
+          "question_text": "Тестовый вопрос",
           "id": 0,
           "variants": [
             {
-              "var_text": "12",
-              "question_id": 0,
-              "id": 0
-            },
-            {
-              "var_text": "42",
-              "question_id": 0,
-              "id": 1
-            },
-            {
-              "var_text": "loh",
-              "question_id": 0,
-              "id": 2
-            }
-          ]
-        }
-      ],
-      "id": 12
-    },
-    {
-      "test_name": "12322",
-      "questions": [
-        {
-          "question_text": "12314",
-          "id": 0,
-          "variants": [
-            {
-              "var_text": "fsfdsafsadf",
-              "question_id": 0,
-              "id": 0
-            },
-            {
-              "var_text": "asdfasdf",
-              "question_id": 1,
-              "id": 2
-            },
-            {
-              "var_text": "asdfasdf",
-              "question_id": 1,
-              "id": 3
-            },
-            {
-              "var_text": "asdfasfdfa",
-              "question_id": 1,
-              "id": 4
-            }
-          ]
-        },
-        {
-          "question_text": "sadfsdf",
-          "id": 1,
-          "variants": [
-            {
-              "var_text": "sdafsdf",
-              "question_id": 1,
-              "id": 0
-            },
-            {
-              "var_text": "fad",
-              "question_id": 1,
-              "id": 1
-            },
-            {
-              "var_text": "asdfadsf",
-              "question_id": 1,
-              "id": 5
-            }
-          ]
-        },
-        {
-          "question_text": "hoooooooooooj?",
-          "id": 2,
-          "variants": [
-            {
-              "var_text": "hoj!",
-              "question_id": 2,
-              "id": 0
-            },
-            {
-              "var_text": "no, hooj!",
-              "question_id": 2,
-              "id": 1
-            }
-          ]
-        }
-      ],
-      "id": 13
-    },
-    {
-      "test_name": "123123",
-      "questions": [
-        {
-          "question_text": "123123?",
-          "id": 0,
-          "variants": [
-            {
-              "var_text": "123123",
-              "question_id": 0,
-              "id": 0
-            },
-            {
-              "var_text": "123123",
-              "question_id": 0,
-              "id": 1
-            },
-            {
-              "var_text": "23123",
-              "question_id": 0,
-              "id": 2
-            }
-          ]
-        },
-        {
-          "question_text": "234234",
-          "id": 1,
-          "variants": [
-            {
-              "var_text": "234234",
-              "question_id": 1,
-              "id": 0
-            },
-            {
-              "var_text": "234234",
-              "question_id": 1,
-              "id": 1
-            },
-            {
-              "var_text": "234234",
-              "question_id": 1,
-              "id": 2
-            }
-          ]
-        },
-        {
-          "question_text": "qweqwe",
-          "id": 2,
-          "variants": [
-            {
-              "var_text": "qweqwe",
-              "question_id": 2,
-              "id": 0
-            },
-            {
-              "var_text": "qweqwe",
-              "question_id": 2,
-              "id": 1
-            },
-            {
-              "var_text": "qweqwe",
-              "question_id": 2,
-              "id": 2
-            }
-          ]
-        }
-      ],
-      "id": 14
-    },
-    {
-      "test_name": "123123sdfsdf",
-      "questions": [
-        {
-          "question_text": "sdfsdfsdfsdf",
-          "id": 0,
-          "variants": [
-            {
-              "var_text": "sdfsdf",
-              "question_id": 0,
-              "id": 0
-            },
-            {
-              "var_text": "sdfsdf",
-              "question_id": 0,
-              "id": 3
-            }
-          ]
-        },
-        {
-          "question_text": "3656356",
-          "id": 1,
-          "variants": [
-            {
-              "var_text": "356356",
-              "question_id": 1,
-              "id": 0
-            },
-            {
-              "var_text": "356356",
-              "question_id": 1,
-              "id": 1
-            }
-          ]
-        }
-      ],
-      "id": 15
-    },
-    {
-      "test_name": "Только что отредактировал этот тест",
-      "questions": [
-        {
-          "question_text": "В жопу раз или вилкой в глаз?",
-          "id": 0,
-          "variants": [
-            {
-              "var_text": "```typescript  let kekus: number = 42; ```",
+              "var_text": "```typescript\n  let kekus: number = 42; \n```",
               "question_id": 0,
               "id": 0
             },
             {
               "id": 1,
               "var_text": "2234234",
+              "question_id": 0
+            },
+            {
+              "id": 2,
+              "var_text": "13234",
               "question_id": 0
             }
           ]
@@ -269,6 +39,59 @@
               "question_id": 1
             }
           ]
+        },
+        {
+          "id": 2,
+          "question_text": "Добавлен в процессе редактирования",
+          "variants": [
+            {
+              "id": 0,
+              "var_text": "Йоу",
+              "question_id": 2
+            },
+            {
+              "id": 1,
+              "var_text": "йоу!",
+              "question_id": 2
+            }
+          ]
+        },
+        {
+          "_setId": 3,
+          "_newVariants": [
+            {
+              "_setId": 0,
+              "_setQuestion_id": 3,
+              "id": 0,
+              "var_text": "2234",
+              "question_id": 3
+            },
+            {
+              "_setId": 1,
+              "_setQuestion_id": 3,
+              "id": 1,
+              "var_text": "234324",
+              "question_id": 3
+            }
+          ],
+          "id": 3,
+          "question_text": "123",
+          "variants": [
+            {
+              "_setId": 0,
+              "_setQuestion_id": 3,
+              "id": 0,
+              "var_text": "2234",
+              "question_id": 3
+            },
+            {
+              "_setId": 1,
+              "_setQuestion_id": 3,
+              "id": 1,
+              "var_text": "234324",
+              "question_id": 3
+            }
+          ]
         }
       ],
       "id": 16
@@ -281,7 +104,7 @@
           "id": 0,
           "variants": [
             {
-              "var_text": "```c++ namespace std cin  ```",
+              "var_text": "```c++\n namespace std cin  \n```",
               "question_id": 0,
               "id": 0
             }
@@ -291,14 +114,14 @@
       "id": 17
     },
     {
-      "test_name": "2315325325",
+      "test_name": "Еще один тест",
       "questions": [
         {
           "question_text": "234234235",
           "id": 0,
           "variants": [
             {
-              "var_text": " ```typescript  alert()    ``` ",
+              "var_text": " ```typescript  \n alert() ;\n ``` ",
               "question_id": 0,
               "id": 0
             }
@@ -504,6 +327,40 @@
         }
       ],
       "id": 26
+    },
+    {
+      "test_name": "Для форматирования разметки MD",
+      "questions": [
+        {
+          "question_text": " trololo",
+          "id": 0,
+          "variants": [
+            {
+              "var_text": "Далее код:\n```html\n  <div class=\"example\"> Hello, World! </div>\n   <ng-template> Epta </ng-template>\n```\n**hooj**",
+              "question_id": 0,
+              "id": 0
+            }
+          ]
+        }
+      ],
+      "id": 27
+    },
+    {
+      "test_name": "234234",
+      "questions": [
+        {
+          "question_text": " 23444",
+          "id": 0,
+          "variants": [
+            {
+              "var_text": "23423",
+              "question_id": 0,
+              "id": 0
+            }
+          ]
+        }
+      ],
+      "id": 28
     }
   ]
 }

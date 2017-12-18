@@ -11,7 +11,8 @@
            formControlName="test_name">
   </mat-form-field>
   <div formArrayName="questions">
-    <div *ngFor="let question of testForm.controls.questions.controls; let i = index ">
+    <div *ngFor="let question of testForm.controls.questions.controls;
+          let i = index ">
       <mat-card class="question-block">
         <div [formGroupName]="i" class="question-form">
           <mat-form-field class="question-field" >
@@ -21,7 +22,8 @@
             </textarea>
           </mat-form-field>
           <div formArrayName="variants">
-            <div *ngFor="let variant of question.controls.variants.controls; let j = index ">
+            <div *ngFor="let variant of question.controls.variants.controls;
+                  let j = index ">
               <div [formGroupName]="j">
                 <mat-form-field class="variant-field">
                   <textarea type="text"

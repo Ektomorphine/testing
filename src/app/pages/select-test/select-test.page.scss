@@ -1,11 +1,9 @@
-@import '../../variables';
-
 .container {
   margin: auto;
   position: relative;
+  text-align: center;
   top: 20px;
   width: 80%;
-  text-align: center;
 }
 
 .card {
@@ -21,30 +19,6 @@
   height: 100%;
   position: relative;
   width: 100%;
-}
-
-.ngx-contextmenu .dropdown-menu {
-  border: solid 1px chartreuse;
-  background-color: darkgreen;
-  padding: 0;
-}
-.ngx-contextmenu li {
-  display: block;
-  border-top: solid 1px chartreuse;
-  text-transform: uppercase;
-  text-align: center;
-}
-.ngx-contextmenu li:first-child {
-  border-top:none;
-}
-.ngx-contextmenu a {
-  color:chartreuse;
-  display: block;
-  padding: 0.5em 1em;
-}
-.ngx-contextmenu a:hover {
-  color:darkgreen;
-  background-color:chartreuse;
 }
 
 

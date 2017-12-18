@@ -15,7 +15,6 @@ import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
   styleUrls: ['./edit-test.page.scss']
 })
 export class EditTestPage implements OnInit, OnChanges {
-
   public test: TestModel;
   public newTestForm: FormGroup;
 
@@ -53,7 +52,7 @@ export class EditTestPage implements OnInit, OnChanges {
     return this.newTestForm.get('questions') as FormArray;
   }
 
-  public setForms(formItem: any, formType: string): void {
+  public setForms(formItem, formType: string): void {
     const ITEMS_FG = formItem.map(item => {
       let variants = item.variants.map(variant => {
         return this._formBuilder.group(variant);
@@ -66,37 +65,32 @@ export class EditTestPage implements OnInit, OnChanges {
     this.newTestForm.setControl(formType, ITEMS_FA);
   }
 
-  public addQuestion() {
+  public addQuestion(): void {
     let questionCounter = this.questions.controls.length;
-    let x = this._formBuilder.array([]);
-    x.push(this._formBuilder.group(new VariantsModel(0, questionCounter)))
+    let newQuestion = this._formBuilder.array([]);
+    newQuestion.push(this._formBuilder.group(new VariantsModel(0, questionCounter)))
     this.questions.push(this._formBuilder
-      .group(new QuestionModel(questionCounter, x)));
+      .group(new QuestionModel(questionCounter, newQuestion)));
   }
 
-  public removeQuestion(i: number) {
-    this.questions.removeAt(i);
+  public removeQuestion(questionIndex: number): void {
+    this.questions.removeAt(questionIndex);
   }
 
-  public addVariant(i: number): void {
-    let FormArray = <FormArray>this.questions.controls[i];
+  public addVariant(questionIndex: number): void {
+    let FormArray = <FormArray>this.questions.controls[questionIndex];
     let FormGroup = FormArray.controls['variants'];
     FormGroup.push(this._formBuilder
-      .group(new VariantsModel(FormGroup.length, i)));
+      .group(new VariantsModel(FormGroup.length, questionIndex)));
   }
 
-  public removeVariant(i: number, j: number): void {
-    let FormArray = <FormArray>this.questions.controls[i];
+  public removeVariant(questionIndex: number, variantIndex: number): void {
+    let FormArray = <FormArray>this.questions.controls[questionIndex];
     let FormGroup = FormArray.controls['variants'];
-    FormGroup.removeAt(j);
+    FormGroup.removeAt(variantIndex);
   }
 
   public saveNewTest(newTest): void {
     this._testService.updateTest(this.test.id, newTest.value);
   }
-
-  revert() {
-    this.newTestForm.reset();
-  }
-
 }

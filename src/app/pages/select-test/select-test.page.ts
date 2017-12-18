@@ -2,6 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { TestService } from '../../services/test.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ContextMenuComponent } from 'ngx-contextmenu';
+import { TestModel } from '../../models/test.model';
 
 
 @Component({
@@ -27,11 +28,16 @@ export class SelectTestPage {
   }
 
   public openTest(test) {
-    this._router.navigate(['/test', test.id])
+    this._router.navigate(['/test', test.id]);
   }
 
   public openTestEditor(test) {
-    console.log('ok');
-    this._router.navigate(['/edit', test.id])
+    this._router.navigate(['/edit', test.id]);
   }
+
+  public deleteTest(testIndex) {
+    this._testService.deleteTest(this.tests[testIndex].id);
+    this.tests.splice(testIndex, 1);
+  }
+
 }

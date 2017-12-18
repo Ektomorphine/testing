@@ -1,15 +1,15 @@
-  <div class="preview-input">
-    <textarea class="preview-field"
-              [(ngModel)]="data.preview">
-    </textarea>
-  </div>
-  <div class="preview-output">
-    Превью
-    <markdown [data]="data.preview">
-    </markdown>
-  </div>
-  <button mat-raised-button
-          [mat-dialog-close]="data.preview"
-          color="primary">
-    Сохранить
-  </button>
+<div class="preview-input">
+  <textarea class="preview-field"
+            [(ngModel)]="data.preview">
+  </textarea>
+</div>
+<div class="preview-output">
+  Превью
+  <markdown [data]="data.preview">
+  </markdown>
+</div>
+<button mat-raised-button
+        [mat-dialog-close]="data.preview"
+        color="primary">
+  Сохранить
+</button>

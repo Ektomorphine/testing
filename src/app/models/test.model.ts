@@ -3,9 +3,9 @@ export class VariantsModel {
   var_text: string = '';
   question_id: number = 0;
 
-  constructor(setId?, setQuestion_id?) {
-    this.id = setId;
-    this.question_id = setQuestion_id;
+  constructor(private _setId?: number, private _setQuestion_id?: number) {
+    this.id = _setId;
+    this.question_id = _setQuestion_id;
   }
 }
 
@@ -14,9 +14,9 @@ export class QuestionModel {
   question_text: string = '';
   variants: VariantsModel[] = [];
 
-  constructor(setId?: number, x?) {
-    this.id = setId;
-    this.variants = x;
+  constructor(private _setId?: number,private _newVariants?) {
+    this.id = _setId;
+    this.variants = _newVariants;
   }
 }
 

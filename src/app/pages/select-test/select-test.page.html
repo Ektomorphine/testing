@@ -3,31 +3,37 @@
     <span>Выбор теста</span>
   </mat-toolbar-row>
 </mat-toolbar>
+
 <context-menu>
   <ng-template contextMenuItem let-item passive="true">
-    {{item?.test_name}}
+    {{item?.test_name}} | {{item?.id}}
     <hr>
   </ng-template>
   <ng-template contextMenuItem
                (execute)="openTestEditor($event.item)">
     Редактировать
   </ng-template>
-  <ng-template contextMenuItem let-item
+  <ng-template contextMenuItem
                (execute)="openTest($event.item)">
 
     Открыть
   </ng-template>
+  <ng-template contextMenuItem let-item
+               (execute)="deleteTest(tests.indexOf($event.item))">
+    Удалить
+  </ng-template>
 </context-menu>
+
 <div class="container">
-  <mat-card *ngFor="let item of tests" class="card">
+  <mat-card *ngFor="let test of tests; let i = index " class="card">
     <button mat-button color="primary"
-            [routerLink]="['/test',item.id]"
+            [routerLink]="['/test',test.id]"
             class="button-card"
             [contextMenu]="basicMenu"
-            [contextMenuSubject]="item"
-            >
+            [contextMenuSubject]="test">
 
-      {{item.test_name}}
+      {{test.test_name}}
+
     </button>
   </mat-card>
 </div>

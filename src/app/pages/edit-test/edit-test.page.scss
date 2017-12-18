@@ -12,14 +12,14 @@
 }
 
 .test-name-change-logo {
-  font:  14px/20px Roboto,"Helvetica Neue",sans-serif;
+  font: 14px/20px Roboto,"Helvetica Neue",sans-serif;
 }
 
 hr.material {
   border: 0;
   height: 0;
-  border-top: 1px solid rgba(0, 0, 0, 0.1);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  border-top: 1px solid rgba(0, 0, 0, .1);
+  border-bottom: 1px solid rgba(255, 255, 255, .3);
 }
 
 .variant-field {
@@ -28,5 +28,35 @@ hr.material {
 }
 
 .full-wd {
-  width: 100%;
+  width: calc(100% - 25px);
+}
+
+.delete-variant-icon {
+  cursor: pointer;
+  transition: .2s;
+  width: 17px;
+  position: relative;
+  top: 10px;
+
+    &:hover {
+      width: 20px;
+    }
+}
+
+.delete-question-icon {
+  cursor: pointer;
+  transition: .2s;
+  width: 17px;
+  position: relative;
+  float: right;
+  top: 10px;
+
+    &:hover {
+      width: 20px;
+    }
+}
+
+.question-header {
+  display: inline-block;
+  margin: 0 auto 20px 0;
 }

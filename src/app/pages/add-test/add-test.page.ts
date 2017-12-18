@@ -24,10 +24,10 @@ export class AddTestPage {
 
   ngOnInit() {
     this.testForm = this._formBuilder.group({
-      test_name: ['', [Validators.required, Validators.minLength(5)]],
+      test_name: [' ', [Validators.required, Validators.minLength(5)]],
       questions: this._formBuilder.array([
         this.initQuestions()
-        ])
+      ])
     })
   }
 
@@ -37,11 +37,11 @@ export class AddTestPage {
       id: this._questionId,
       variants: this._formBuilder.array([
         this.initVariants()
-        ])
+      ])
     })
   }
 
-  public openSnackBarOnSend() {
+  public openSnackBarOnSend(): void {
     this.snackBar.open('Готово!', ':>', {
       duration: 1500
     });
@@ -50,31 +50,31 @@ export class AddTestPage {
   public openDialogPreviewPage(): void {
    let dialog = this.dialog.open(PreviewPage, {
      width: '100%',
-     data: { preview: this.markdownPreview }
+     data: {preview: this.markdownPreview}
    });
 
    dialog.afterClosed()
      .subscribe(result => {
-     this.markdownPreview = result;
+       this.markdownPreview = result;
      });
   }
 
-  public addQuestion() {
+  public addQuestion(): void {
     this._questionId++;
     this._variantId = 0;
     const CONTROL = <FormArray>this.testForm.controls['questions'];
     CONTROL.push(this.initQuestions());
   }
 
-  public saveTest(testResult) {
+  public saveTest(testResult): void {
     this._testService
       .setTest(testResult.value);
     this.openSnackBarOnSend();
   }
 
-  public removeQuestions(i: number) {
+  public removeQuestions(questionIndex: number): void {
     const CONTROL = <FormArray>this.testForm.controls['questions'];
-    CONTROL.removeAt(i)
+    CONTROL.removeAt(questionIndex)
   }
 
   public initVariants(): FormGroup {
@@ -85,7 +85,7 @@ export class AddTestPage {
     })
   }
 
-  public addVariant(question) {
+  public addVariant(question): void {
     this._variantId++;
     // find *questions* FormArray
     let questionsForms = <FormArray>this.testForm.controls['questions'];
@@ -95,14 +95,10 @@ export class AddTestPage {
     CONTROL.push(this.initVariants());
   }
 
-  public removeVariant(j: number, question) {
+  public removeVariant(variantIndex: number, question): void {
     let questionsForms = <FormArray>this.testForm.controls['questions'];
     let variantsForms =  <FormArray>questionsForms.controls[question.controls.id.value];
     const CONTROL = variantsForms.controls['variants'];
-    CONTROL.removeAt(j)
-  }
-
-  hooj() {
-    console.log(this.testForm);
+    CONTROL.removeAt(variantIndex)
   }
 }
