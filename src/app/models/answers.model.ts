@@ -2,8 +2,8 @@ export class TestResult {
   test_id: number;
   answers: TestAnswerResult[] = [];
 
-  constructor(private _setTestId: number) {
-    this.test_id = _setTestId;
+  constructor(setTestId: number) {
+    this.test_id = setTestId;
   }
 
   public addElement(item: TestAnswerResult) {
@@ -15,8 +15,12 @@ export class TestAnswerResult {
   questionId: number;
   answerId: number;
 
-  constructor(private _question: number, private _answer: number) {
-    this.questionId = _question,
-    this.answerId = _answer
+  constructor(question: number, answer: number) {
+    this.questionId = question,
+    this.answerId = answer
   }
 }
+
+
+// Если установить аргументам контрукторов модификаторы доступа private, то они
+// тоже добавляются в результаты ответов .

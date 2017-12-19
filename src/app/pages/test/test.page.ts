@@ -9,6 +9,7 @@ import {
 import { TestResult, TestAnswerResult } from '../../models/answers.model';
 import { Observable } from 'rxjs/Rx';
 import { Subscription } from 'rxjs/Subscription';
+import * as moment from 'moment'; // add this 1 of 4
 
 @Component({
   selector: 'test-page',
@@ -21,13 +22,16 @@ export class TestPage implements OnInit {
   public questions: QuestionModel[] = [];
   public variants: VariantsModel[] = [];
   public iteration = 0;
-  public timer = 30;
+  private _timer = 90;
   private _subscription: Subscription;
   private _testResultsData: TestResult;
+  public formattedTimer: string;
 
   constructor(private _testService: TestService,
               private _activatedRoute: ActivatedRoute,
-              private _router: Router) {}
+              private _router: Router) {
+
+  }
 
   ngOnInit() {
     // Получение данных с сервера и распределение этих данных по массивам
@@ -48,12 +52,13 @@ export class TestPage implements OnInit {
         }
       )
     // Таймер теста.
-    let timer = Observable.timer(2000,1000);
+    let timer = Observable.timer(250,1000);
     this._subscription = timer.subscribe(seconds => {
-        this.timer--;
-        if (this.timer == 0) {
+        this.formattedTimer = moment.utc(this._timer*1000).format('mm:ss');
+        this._timer--;
+        if (this._timer == 0) {
           this.iteration++;
-          this.timer = 30;
+          this._timer = 90;
           this.getAnswers();
           this.checkTestEnd()
         }
@@ -72,10 +77,11 @@ export class TestPage implements OnInit {
 
   // Получает ответ на вопрос и переключает вопрос на следующий.
   public openNextQuestion(question, variant): void {
-    this.timer = 30;
+    this._timer = 90;
     this.iteration++;
     this.getAnswers(question, variant);
     this.checkTestEnd();
+    console.log(this._testResultsData);
   }
 
   // Получает результат ответа на вопрос и сохраняет их.

@@ -7,7 +7,7 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
 
 const TESTS_URL = 'http://localhost:3000/tests';
-const ANSWERS_URL = 'http://localhost:3001/results'
+const ANSWERS_URL = 'http://localhost:3000/answers'
 
 @Injectable()
 export class TestService {
@@ -22,6 +22,11 @@ export class TestService {
   public setTest(body): any {
     return this._http.post(TESTS_URL, body).subscribe();
   }
+
+  // public createTest(data: TestModel): Observable<TestModel> {
+  //   return this._http.post(TESTS_URL, data);
+  // }
+
   // send result of test
   public setAnswers(body): any {
     return this._http.post(ANSWERS_URL, body).subscribe();

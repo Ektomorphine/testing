@@ -4,8 +4,8 @@
   </mat-toolbar-row>
 </mat-toolbar>
 
-<div class="container" *ngIf="!test">
-  Loading...
+<div class="spinner" *ngIf="!test">
+  <mat-spinner class="spinner"></mat-spinner>
 </div>
 
 <div class="container" *ngIf="test">
