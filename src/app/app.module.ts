@@ -5,7 +5,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { Routes, RouterModule} from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MarkdownModule} from 'ngx-markdown';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { TestPage } from './pages/test/test.page';
@@ -14,11 +13,9 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { AddTestPage } from './pages/add-test/add-test.page';
 import { PreviewPage } from './pages/preview/preview.page';
 import { EditTestPage } from './pages/edit-test/edit-test.page';
-
+import { ResultsPage } from './pages/results/results.page';
 import { TestService } from './services/test.service';
-
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
 import {
   MatButtonModule,
   MatSidenavModule,
@@ -30,8 +27,10 @@ import {
   MatDialogModule,
   MatExpansionModule
 } from '@angular/material';
-
 import { ContextMenuModule } from 'ngx-contextmenu';
+import { TestGuard } from './services/test.guard';
+import { CurrentTestGuard } from './services/current-test.guard';
+import { HomePage } from './pages/home/home.page';
 
 
 @NgModule({
@@ -42,7 +41,9 @@ import { ContextMenuModule } from 'ngx-contextmenu';
     SelectTestPage,
     AddTestPage,
     PreviewPage,
-    EditTestPage
+    EditTestPage,
+    ResultsPage,
+    HomePage
   ],
   imports: [
     BrowserModule,
@@ -63,7 +64,7 @@ import { ContextMenuModule } from 'ngx-contextmenu';
     MatExpansionModule,
     ContextMenuModule
   ],
-  providers: [TestService],
+  providers: [TestService, TestGuard, CurrentTestGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

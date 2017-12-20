@@ -66,9 +66,8 @@ export class AddTestPage {
     CONTROL.push(this.initQuestions());
   }
 
-  public saveTest(testResult): void {
-    this._testService
-      .setTest(testResult.value);
+  public saveTest(data: TestModel): void {
+    this._testService.createTest(data).subscribe();
     this.openSnackBarOnSend();
   }
 

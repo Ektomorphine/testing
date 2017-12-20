@@ -1,6 +1,7 @@
 import { Component, OnInit, OnChanges } from '@angular/core';
 import { ActivatedRoute } from '@angular/router'
 import { TestService } from '../../services/test.service';
+import { MatSnackBar } from '@angular/material';
 import {
   TestModel,
   QuestionModel,
@@ -20,12 +21,13 @@ export class EditTestPage implements OnInit, OnChanges {
 
   constructor(private _activatedRoute: ActivatedRoute,
               private _testService: TestService,
-              private _formBuilder: FormBuilder) {
+              private _formBuilder: FormBuilder,
+              private _snackBar: MatSnackBar) {
     this.createForm();
   }
 
   ngOnInit() {
-    this._testService.getTest(+this._activatedRoute.snapshot.params['id'])
+    this._testService.findTest(+this._activatedRoute.snapshot.params['id'])
       .subscribe(
         data => {
           this.test = data;
@@ -90,7 +92,14 @@ export class EditTestPage implements OnInit, OnChanges {
     FormGroup.removeAt(variantIndex);
   }
 
+  public openSnackBarOnSend(): void {
+    this._snackBar.open('Готово!', ':>', {
+      duration: 1500
+    });
+  }
+
   public saveNewTest(newTest): void {
-    this._testService.updateTest(this.test.id, newTest.value);
+    this._testService.updateTest(this.test.id, newTest.value).subscribe();
+    this.openSnackBarOnSend()
   }
 }

@@ -12,19 +12,23 @@ import { TestModel } from '../../models/test.model';
 })
 export class SelectTestPage {
 
-  public tests = [];
+  public tests: TestModel[] = [];
+  public flag = ''
   constructor(private _testService: TestService,
               private _activatedRoute: ActivatedRoute,
               private _router: Router) {
   }
 
   ngOnInit() {
-    this._testService
-      .getTest()
-      .subscribe((data => {
-        this.tests = data;
-      })
-    )
+    this._testService.getTests()
+      .subscribe(data => this.tests = data);
+    this._testService.getCurrentTest().subscribe(data =>{
+      if (data.test_id) {
+        this.flag = 'Есть несохраненный тест'
+      } else {
+        this.flag = 'ок :)'
+      }
+    });
   }
 
   public openTest(test) {
@@ -36,8 +40,11 @@ export class SelectTestPage {
   }
 
   public deleteTest(testIndex) {
-    this._testService.deleteTest(this.tests[testIndex].id);
+    this._testService.deleteTest(this.tests[testIndex].id).subscribe();
     this.tests.splice(testIndex, 1);
   }
 
+  public hooj() {
+    alert('ok!')
+  }
 }

@@ -6,10 +6,10 @@ import {
   QuestionModel,
   VariantsModel
 } from '../../models/test.model';
-import { TestResult, TestAnswerResult } from '../../models/answers.model';
+import * as moment from 'moment';
+import { TestResult, TestAnswerResult } from '../../models/test-result.model';
 import { Observable } from 'rxjs/Rx';
 import { Subscription } from 'rxjs/Subscription';
-import * as moment from 'moment'; // add this 1 of 4
 
 @Component({
   selector: 'test-page',
@@ -34,10 +34,8 @@ export class TestPage implements OnInit {
   }
 
   ngOnInit() {
-    // Получение данных с сервера и распределение этих данных по массивам
-    // для более удобного отображения данных в шаблоне.
     this._testService
-      .getTest(+this._activatedRoute.snapshot.params['id'])
+      .findTest(+this._activatedRoute.snapshot.params['id'])
       .subscribe(
         data => {
           this.test = data;
@@ -51,6 +49,7 @@ export class TestPage implements OnInit {
           })
         }
       )
+    this.buildOldTest();
     // Таймер теста.
     let timer = Observable.timer(250,1000);
     this._subscription = timer.subscribe(seconds => {
@@ -65,27 +64,56 @@ export class TestPage implements OnInit {
     });
   }
 
-  // Проверяет, не закончился ли тест.
-  // Если да, то отправляет данные с результатами ответов на сервер,
-  // и редиректит на страницу выбора теста.
+  ngOnDestroy() {
+    this._subscription.unsubscribe();
+  }
+
+  canDeactivate(): boolean {
+    if (this.iteration !== this.questions.length) {
+      alert('Состояние теста сохранено');
+      this.saveCurrentTest(this._testResultsData);
+    }
+    return true;
+  }
+
+  public buildOldTest() {
+    this._testService.getCurrentTest().subscribe(data => {
+      if (data.iteration >= 0) {
+        this.iteration = data.iteration;
+        this._testResultsData.answers = data.answers;
+        this._timer = data.timeLeft;
+      };
+    });
+  }
+
+  public saveCurrentTest(data: TestResult): void {
+    data.iteration = this.iteration;
+    this._testService.createCurrentTest(data).subscribe();
+  }
+
   public checkTestEnd() {
     if (this.iteration  == this.questions.length) {
-      this._router.navigate(['/select']);
-      this._testService.setAnswers(this._testResultsData)
+      this._testService.makeCurrentTestEmpty({}).subscribe();
+      this.saveResults();
     }
   }
 
-  // Получает ответ на вопрос и переключает вопрос на следующий.
+  public saveResults(): void {
+    this._testService.createAnswers(this._testResultsData).subscribe(
+        succsess => {
+          console.log('createAnswers ok');
+          this._router.navigate(['/results', succsess.id])
+        }
+      );
+  }
+
   public openNextQuestion(question, variant): void {
     this._timer = 90;
     this.iteration++;
     this.getAnswers(question, variant);
     this.checkTestEnd();
-    console.log(this._testResultsData);
   }
 
-  // Получает результат ответа на вопрос и сохраняет их.
-  // Если ответ не был получен, то записывает null вместо результата ответа.
   public getAnswers(question?, variant?) {
     if (!question && !variant) {
       this._testResultsData
@@ -96,8 +124,5 @@ export class TestPage implements OnInit {
     }
   }
 
-  // Отписка при разрушении компонента
-  ngOnDestroy() {
-    this._subscription.unsubscribe();
-  }
+
 }

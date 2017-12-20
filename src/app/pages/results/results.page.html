@@ -1,0 +1,8 @@
+<div class="container" *ngIf="answers">
+  Result ID: {{answers.id}} |
+  Test ID: {{answers.test_id}}
+  <hr>
+  <div *ngFor="let answer of answers.answers">
+    Вопрос: {{answer.questionId}} | Ответ: {{answer.answerId}}
+  </div>
+</div>

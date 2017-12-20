@@ -1,57 +1,19 @@
 {
-  "results": [
+  "posts": [
     {
-      "_setTestId": 1,
-      "answers": [
-        {
-          "_question": 0,
-          "_answer": 1,
-          "questionId": 0,
-          "answerId": 1
-        },
-        {
-          "_question": 1,
-          "_answer": 0,
-          "questionId": 1,
-          "answerId": 0
-        },
-        {
-          "_question": 2,
-          "_answer": 1,
-          "questionId": 2,
-          "answerId": 1
-        },
-        {
-          "_question": 3,
-          "_answer": 0,
-          "questionId": 3,
-          "answerId": 0
-        }
-      ],
-      "test_id": 1,
-      "id": 1
-    },
-    {
-      "answers": [
-        {
-          "questionId": 0,
-          "answerId": 1
-        },
-        {
-          "questionId": 1,
-          "answerId": 1
-        },
-        {
-          "questionId": 2,
-          "answerId": 3
-        },
-        {
-          "questionId": 3,
-          "answerId": 0
-        }
-      ],
-      "test_id": 1,
-      "id": 2
+      "id": 1,
+      "title": "json-server",
+      "author": "typicode"
     }
-  ]
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  }
 }

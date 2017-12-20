@@ -60,7 +60,7 @@
     <button class="send-test-button"
             mat-raised-button
             color="primary"
-            (click)="saveTest(testForm)"
+            (click)="saveTest(testForm.value)"
             [disabled]="!testForm.valid">
       Отправить
     </button>

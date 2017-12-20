@@ -1,6 +1,9 @@
 export class TestResult {
   test_id: number;
   answers: TestAnswerResult[] = [];
+  id: number;
+  iteration?: number;
+  timeLeft? = 30;
 
   constructor(setTestId: number) {
     this.test_id = setTestId;
@@ -23,4 +26,4 @@ export class TestAnswerResult {
 
 
 // Если установить аргументам контрукторов модификаторы доступа private, то они
-// тоже добавляются в результаты ответов .
+// тоже добавляются в результаты ответов.
