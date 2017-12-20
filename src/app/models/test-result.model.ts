@@ -10,7 +10,7 @@ export class TestResult {
   }
 
   public addElement(item: TestAnswerResult) {
-    this.answers.push(item)
+    this.answers.push(item);
   }
 }
 
@@ -19,8 +19,8 @@ export class TestAnswerResult {
   answerId: number;
 
   constructor(question: number, answer: number) {
-    this.questionId = question,
-    this.answerId = answer
+    this.questionId = question;
+    this.answerId = answer;
   }
 }
 

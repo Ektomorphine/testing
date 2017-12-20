@@ -7,8 +7,8 @@ import { TestModel } from '../models/test.model';
 import { TestResult } from '../models/test-result.model';
 
 const TESTS_URL = 'http://localhost:3000/tests';
-const ANSWERS_URL = 'http://localhost:3000/answers'
-const CURRENT_TEST_URL = 'http://localhost:3000/current_test'
+const ANSWERS_URL = 'http://localhost:3000/answers';
+const CURRENT_TEST_URL = 'http://localhost:3000/current_test';
 
 @Injectable()
 export class TestService {
@@ -16,7 +16,7 @@ export class TestService {
   constructor(private _http: HttpClient) {}
 
   public getTests(): Observable<TestModel[]> {
-    return this._http.get<TestModel[]>(TESTS_URL)
+    return this._http.get<TestModel[]>(TESTS_URL);
   }
 
   public findTest(id: number): Observable<TestModel> {
@@ -36,23 +36,15 @@ export class TestService {
   }
 
   public deleteTest(id: number): Observable<TestModel> {
-    return this._http.delete<TestModel>(`${TESTS_URL}/${id}`)
+    return this._http.delete<TestModel>(`${TESTS_URL}/${id}`);
   }
 
   public getAnswers(id: number): Observable<TestResult> {
-    // return Observable.create((observer: Observer<TestResult>) => {
-    //   this._http
-    //     .get<TestResult>(`${ANSWERS_URL}/${id}`)
-    //     .subscribe(resp => {
-    //       observer.next(resp);
-    //       observer.complete();
-    //     })
-    // })
     return this._http.get<TestResult>(`${ANSWERS_URL}/${id}`);
   }
 
   public createCurrentTest(data: TestResult): Observable<TestResult> {
-    return this._http.post<TestResult>(CURRENT_TEST_URL, data)
+    return this._http.post<TestResult>(CURRENT_TEST_URL, data);
   }
 
   public getCurrentTest(): Observable<TestResult> {
@@ -60,6 +52,6 @@ export class TestService {
   }
 
   public makeCurrentTestEmpty(data): Observable<TestResult> {
-    return this._http.post<TestResult>(CURRENT_TEST_URL, data)
+    return this._http.post<TestResult>(CURRENT_TEST_URL, data);
   }
 }
