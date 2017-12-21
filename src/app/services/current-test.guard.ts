@@ -19,6 +19,7 @@ export class CurrentTestGuard implements CanActivate {
               private _router: Router) { }
 
   canActivate() {
+    this._isCurrentTest = true;
     this._testService.getCurrentTest().subscribe(
       data => {
         if (data.test_id) {

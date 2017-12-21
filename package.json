@@ -3,10 +3,9 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "start": "concurrently \"npm run ng\"  \"npm run server-tests\" \"npm run server-answers\"",
+    "start": "concurrently \"npm run ng\"  \"npm run server-tests\"",
     "ng": "ng serve",
     "server-tests": "json-server src/tests.json --watch",
-    "server-answers": "json-server src/answers.json --port 3001 --watch",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",

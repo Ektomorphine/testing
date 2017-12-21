@@ -102,7 +102,8 @@ export class TestPage implements OnInit {
     this._testService.createAnswers(this._testResultsData).subscribe(
         succsess => {
           console.log('createAnswers ok');
-          this._router.navigate(['/results', succsess.id])
+          setTimeout(() => {
+            this._router.navigate(['/results', succsess.id])}, 1000)
         }
       );
   }
