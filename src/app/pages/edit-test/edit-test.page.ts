@@ -1,5 +1,5 @@
 import { Component, OnInit, OnChanges } from '@angular/core';
-import { ActivatedRoute } from '@angular/router'
+import { ActivatedRoute } from '@angular/router';
 import { TestService } from '../../services/test.service';
 import { MatSnackBar } from '@angular/material';
 import {
@@ -33,7 +33,7 @@ export class EditTestPage implements OnInit, OnChanges {
           this.test = data;
           this.ngOnChanges();
         }
-      )
+      );
   }
 
   ngOnChanges() {
@@ -58,21 +58,22 @@ export class EditTestPage implements OnInit, OnChanges {
     const ITEMS_FG = formItem.map(item => {
       let variants = item.variants.map(variant => {
         return this._formBuilder.group(variant);
-      })
+      });
       variants = this._formBuilder.array(variants);
       item.variants = variants;
       return this._formBuilder.group(item);
-    })
+    });
     const ITEMS_FA = this._formBuilder.array(ITEMS_FG);
     this.newTestForm.setControl(formType, ITEMS_FA);
   }
 
   public addQuestion(): void {
-    let questionCounter = this.questions.controls.length;
-    let newQuestion = this._formBuilder.array([]);
-    newQuestion.push(this._formBuilder.group(new VariantsModel(0, questionCounter)))
+    const QUESTION_COUNTER = this.questions.controls.length;
+    const NEW_QUESTION = this._formBuilder.array([]);
+    NEW_QUESTION.push(this._formBuilder
+      .group(new VariantsModel(0, QUESTION_COUNTER)));
     this.questions.push(this._formBuilder
-      .group(new QuestionModel(questionCounter, newQuestion)));
+      .group(new QuestionModel(QUESTION_COUNTER, NEW_QUESTION)));
   }
 
   public removeQuestion(questionIndex: number): void {
@@ -100,6 +101,6 @@ export class EditTestPage implements OnInit, OnChanges {
 
   public saveNewTest(newTest): void {
     this._testService.updateTest(this.test.id, newTest.value).subscribe();
-    this.openSnackBarOnSend()
+    this.openSnackBarOnSend();
   }
 }

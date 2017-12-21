@@ -16,7 +16,7 @@ import { Subscription } from 'rxjs/Subscription';
   templateUrl: './test.page.html',
   styleUrls: ['./test.page.scss']
 })
-export class TestPage implements OnInit {
+export class TestPage implements OnInit, OnDestroy {
 
   public test: TestModel;
   public questions: QuestionModel[] = [];
@@ -45,21 +45,21 @@ export class TestPage implements OnInit {
             this.questions.push(item);
             item.variants.forEach(variants => {
               this.variants.push(variants);
-            })
-          })
+            });
+          });
         }
-      )
+      );
     this.buildOldTest();
     // Таймер теста.
-    let timer = Observable.timer(250,1000);
+    let timer = Observable.timer(250, 1000);
     this._subscription = timer.subscribe(seconds => {
-        this.formattedTimer = moment.utc(this._timer*1000).format('mm:ss');
+        this.formattedTimer = moment.utc(this._timer * 1000).format('mm:ss');
         this._timer--;
-        if (this._timer == 0) {
+        if (this._timer === 0) {
           this.iteration++;
           this._timer = 90;
           this.getAnswers();
-          this.checkTestEnd()
+          this.checkTestEnd();
         }
     });
   }
@@ -82,7 +82,7 @@ export class TestPage implements OnInit {
         this.iteration = data.iteration;
         this._testResultsData.answers = data.answers;
         this._timer = data.timeLeft;
-      };
+      }
     });
   }
 
@@ -92,7 +92,7 @@ export class TestPage implements OnInit {
   }
 
   public checkTestEnd() {
-    if (this.iteration  == this.questions.length) {
+    if (this.iteration  === this.questions.length) {
       this._testService.makeCurrentTestEmpty({}).subscribe();
       this.saveResults();
     }
@@ -101,7 +101,6 @@ export class TestPage implements OnInit {
   public saveResults(): void {
     this._testService.createAnswers(this._testResultsData).subscribe(
         succsess => {
-          console.log('createAnswers ok');
           setTimeout(() => {
             this._router.navigate(['/results', succsess.id])}, 1000)
         }

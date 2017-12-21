@@ -20,7 +20,6 @@ export class ResultsPage implements OnInit {
       .subscribe(
         data => {
          this.answers = data;
-      }
-    )
+      });
   }
 }

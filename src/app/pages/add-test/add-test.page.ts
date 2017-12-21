@@ -1,17 +1,17 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { TestService } from '../../services/test.service';
 import { TestModel } from '../../models/test.model';
 import { MatSnackBar } from '@angular/material';
 import { PreviewPage } from '../preview/preview.page';
-import { MatDialog } from '@angular/material'
+import { MatDialog } from '@angular/material';
 
 @Component({
   selector: 'add-test-page',
   templateUrl: './add-test.page.html',
   styleUrls: ['./add-test.page.scss']
 })
-export class AddTestPage {
+export class AddTestPage implements OnInit {
   public testForm: FormGroup;
   public markdownPreview = '**Example**';
   private _questionId = 0;
@@ -28,7 +28,7 @@ export class AddTestPage {
       questions: this._formBuilder.array([
         this.initQuestions()
       ])
-    })
+    });
   }
 
   public initQuestions(): FormGroup {
@@ -38,7 +38,7 @@ export class AddTestPage {
       variants: this._formBuilder.array([
         this.initVariants()
       ])
-    })
+    });
   }
 
   public openSnackBarOnSend(): void {
@@ -48,12 +48,12 @@ export class AddTestPage {
   }
 
   public openDialogPreviewPage(): void {
-   let dialog = this.dialog.open(PreviewPage, {
+   const DIALOG = this.dialog.open(PreviewPage, {
      width: '100%',
      data: {preview: this.markdownPreview}
    });
 
-   dialog.afterClosed()
+   DIALOG.afterClosed()
      .subscribe(result => {
        this.markdownPreview = result;
      });
@@ -73,7 +73,7 @@ export class AddTestPage {
 
   public removeQuestions(questionIndex: number): void {
     const CONTROL = <FormArray>this.testForm.controls['questions'];
-    CONTROL.removeAt(questionIndex)
+    CONTROL.removeAt(questionIndex);
   }
 
   public initVariants(): FormGroup {
@@ -81,23 +81,23 @@ export class AddTestPage {
       var_text: '',
       question_id: this._questionId,
       id: this._variantId
-    })
+    });
   }
 
   public addVariant(question): void {
     this._variantId++;
     // find *questions* FormArray
-    let questionsForms = <FormArray>this.testForm.controls['questions'];
+    const QUESTION_FORMS = <FormArray>this.testForm.controls['questions'];
     // Select FormGroup from FormArray by ID and convert it to FormArray
-    let variantsForms =  <FormArray>questionsForms.controls[question.controls.id.value];
-    const CONTROL = variantsForms.controls['variants'];
+    const VARIANT_FORMS =  <FormArray>QUESTION_FORMS.controls[question.controls.id.value];
+    const CONTROL = VARIANT_FORMS.controls['variants'];
     CONTROL.push(this.initVariants());
   }
 
   public removeVariant(variantIndex: number, question): void {
-    let questionsForms = <FormArray>this.testForm.controls['questions'];
-    let variantsForms =  <FormArray>questionsForms.controls[question.controls.id.value];
-    const CONTROL = variantsForms.controls['variants'];
-    CONTROL.removeAt(variantIndex)
+    const QUESTION_FORMS = <FormArray>this.testForm.controls['questions'];
+    const VARIANT_FORMS =  <FormArray>QUESTION_FORMS.controls[question.controls.id.value];
+    const CONTROL = VARIANT_FORMS.controls['variants'];
+    CONTROL.removeAt(variantIndex);
   }
 }
